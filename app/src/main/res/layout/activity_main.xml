@@ -26,7 +26,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
-        android:text="Rodolfo Miguel de Sousa"
+        android:text="@string/profile_name"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/profilePhoto"
@@ -70,4 +70,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/playButton" />
+
+    <TextView
+        android:id="@+id/speechPhrases"
+        android:layout_width="318dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:text=""
+        android:alpha="0.0"
+        app:layout_constraintBottom_toBottomOf="@+id/speechBubble"
+        app:layout_constraintStart_toStartOf="@+id/speechBubble" />
 </android.support.constraint.ConstraintLayout>

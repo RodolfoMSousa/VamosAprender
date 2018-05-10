@@ -1,5 +1,6 @@
 package tcc.faculdade.com.vamosaprender;
 
+import android.content.res.Resources;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,38 +19,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Button play = (Button) findViewById(R.id.playButton);
         Button stop = (Button) findViewById(R.id.profileButton);
-        final TextView name = (TextView) findViewById(R.id.name);
+        final TextView speechPrhases = (TextView) findViewById(R.id.speechPhrases);
         final ImageView bubble = (ImageView) findViewById(R.id.speechBubble);
-        final Animation bub = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
-        final Animation bub2 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
+        final Animation bubbleAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
+        final Animation phraseAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 bubble.setAlpha((float) 1.0);
 
 
-                bub.setAnimationListener(new Animation.AnimationListener() {
+                bubbleAnim.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-
+                        Resources res = getResources();
+                        String[] phrases = res.getStringArray(R.array.start_prhases);
+                        speechPrhases.setText(phrases[0]);
+                        speechPrhases.setAlpha((float) 1.0);
+                        speechPrhases.startAnimation(phraseAnim);
                     }
 
                     @Override
                     public void onAnimationEnd(Animation animation) {
-                        Toast.makeText(getApplicationContext(), "deu", Toast.LENGTH_LONG).show();
-                        name.startAnimation(bub2);                   }
+                    }
 
                     @Override
                     public void onAnimationRepeat(Animation animation) {
 
                     }
                 });
-                bubble.startAnimation(bub);
-
-
-
+                bubble.startAnimation(bubbleAnim);
             }
         });
 
