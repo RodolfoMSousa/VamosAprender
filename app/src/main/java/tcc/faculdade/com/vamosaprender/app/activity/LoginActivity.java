@@ -71,9 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                                     editor.putString("senha", password.getText().toString());
                                     editor.commit();
 
-                                    //Proxima Activity
-                                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
-
                                     //**********AQUI CHAMO O BANCO
                                     try {
                                         db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
@@ -84,6 +81,9 @@ public class LoginActivity extends AppCompatActivity {
                                         db.execSQL("INSERT INTO login(usuarioId, userName, senha) SELECT " + l.getUsuarioId() + ",'" + l.getUserName() + "','" + l.getSenha() + "'" +
                                                 " WHERE NOT EXISTS(SELECT 1 FROM login WHERE usuarioId = " + l.getUsuarioId() + ")");
 
+                                        //Proxima Activity
+                                        startActivity(new Intent(LoginActivity.this,MainActivity.class));
+                                        finish();
 
                                     } catch (Exception e) {
                                         e.printStackTrace();

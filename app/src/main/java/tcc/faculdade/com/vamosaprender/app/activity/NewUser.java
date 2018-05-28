@@ -117,8 +117,10 @@ public class NewUser extends AppCompatActivity {
                                 db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
                                 db.execSQL("INSERT INTO login(usuarioId, userName, senha) SELECT " + login.getUsuarioId() + ",'" + login.getUserName() + "','" + login.getSenha() + "'" +
                                         " WHERE NOT EXISTS(SELECT 1 FROM login WHERE usuarioId = " + login.getUsuarioId() + ")");
+
                                 //***Após criar o Banco eu chamo a new activity
                                 startActivity(new Intent(NewUser.this,MainActivity.class));
+                                finish();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
