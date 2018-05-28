@@ -2,7 +2,7 @@ package tcc.faculdade.com.vamosaprender.app.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -27,7 +27,7 @@ import tcc.faculdade.com.vamosaprender.app.entidades.Login;
 import tcc.faculdade.com.vamosaprender.app.entidades.Usuario;
 import tcc.faculdade.com.vamosaprender.app.retrofit.RetrofitConfig;
 
-public class NewUser extends AppCompatActivity {
+public class NewUserActivity extends AppCompatActivity {
 
     EditText novoNomeId;
     EditText novoSobrenomeId;
@@ -46,6 +46,9 @@ public class NewUser extends AppCompatActivity {
         novoUsuId = findViewById(R.id.novoUusId);
         novaSenhaId = findViewById(R.id.novaSenhaId);
         criarNovoUsu = findViewById(R.id.criarNovoUsu);
+
+        SharedPreferences loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = loginArmazenado.edit();
 
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
@@ -111,6 +114,11 @@ public class NewUser extends AppCompatActivity {
                         }else{
                             Toast.makeText(getApplicationContext(), "CADASTRO REALIZADO COM SUCESSO", Toast.LENGTH_SHORT).show();
 
+                            //Salvando o Login e senha no SharedPreferences
+                            editor.putString("userName", novoUsuId.getText().toString());
+                            editor.putString("senha", novaSenhaId.getText().toString());
+                            editor.commit();
+
                             //**********AQUI CHAMO O BANCO
                             SQLiteDatabase db;
                             try {
@@ -119,7 +127,7 @@ public class NewUser extends AppCompatActivity {
                                         " WHERE NOT EXISTS(SELECT 1 FROM login WHERE usuarioId = " + login.getUsuarioId() + ")");
 
                                 //***Após criar o Banco eu chamo a new activity
-                                startActivity(new Intent(NewUser.this,MainActivity.class));
+                                startActivity(new Intent(NewUserActivity.this,MainActivity.class));
                                 finish();
                             } catch (Exception e) {
                                 e.printStackTrace();

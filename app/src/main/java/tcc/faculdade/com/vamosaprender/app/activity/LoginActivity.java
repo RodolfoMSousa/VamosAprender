@@ -3,7 +3,6 @@ package tcc.faculdade.com.vamosaprender.app.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import retrofit2.Response;
 import tcc.faculdade.com.vamosaprender.R;
 import tcc.faculdade.com.vamosaprender.app.entidades.Login;
 import tcc.faculdade.com.vamosaprender.app.retrofit.RetrofitConfig;
-import tcc.faculdade.com.vamosaprender.app.servicos.LoginService;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -117,7 +115,7 @@ public class LoginActivity extends AppCompatActivity {
         {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, NewUser.class));
+                startActivity(new Intent(LoginActivity.this, NewUserActivity.class));
 
             }
         });
