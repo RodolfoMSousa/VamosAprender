@@ -1,5 +1,9 @@
 package tcc.faculdade.com.vamosaprender.app.activity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -79,11 +83,11 @@ public class NewUser extends AppCompatActivity {
                     try {
                         a = call.execute();
                         aluno = a.body();
-                        Log.e("", a.message().toString());
+                        Log.e("Inserido", "Usuario/Aluno inserido com sucesso");
 
                     } catch (IOException e) {
+                        Log.e("CATCH", "Ao inserir novo usuario");
                         e.printStackTrace();
-                        Log.e("anem", "Deu ruim");
                     }
 
 
@@ -99,16 +103,33 @@ public class NewUser extends AppCompatActivity {
                     try {
                         l = callLogin.execute();
                         login = l.body();
-                        if (login == null)
-                            Log.e("OPA", "Deu BOM");
+                        // *******Login == null significa que o userName ja existia.
+                        if (login == null) {
+                            Log.e("Login", "Usuario já existe");
+                            Toast.makeText(getApplicationContext(), "POR FAVOR ESCOLHA OUTRO NOME DE USUARIO", Toast.LENGTH_SHORT).show();
+                            login = new Login();
+                        }else{
+                            Toast.makeText(getApplicationContext(), "CADASTRO REALIZADO COM SUCESSO", Toast.LENGTH_SHORT).show();
+
+                            //**********AQUI CHAMO O BANCO
+                            SQLiteDatabase db;
+                            try {
+                                db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
+                                db.execSQL("INSERT INTO login(usuarioId, userName, senha) SELECT " + login.getUsuarioId() + ",'" + login.getUserName() + "','" + login.getSenha() + "'" +
+                                        " WHERE NOT EXISTS(SELECT 1 FROM login WHERE usuarioId = " + login.getUsuarioId() + ")");
+                                //***Após criar o Banco eu chamo a new activity
+                                startActivity(new Intent(NewUser.this,MainActivity.class));
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+
                     } catch (IOException ex) {
-                        Log.e("OPA", "Deu REUIMDEMAIS");
+                        Log.e("CATCH", "Ao chamar a funcao para criar login");
+                        ex.printStackTrace();
                     }
 
-                    if (login == null) {
-                        Toast.makeText(getApplicationContext(), "POR FAVOR ESCOLHA OUTRO NOME DE USUARIO", Toast.LENGTH_SHORT).show();
-                        login = new Login();
-                    }
+
 
                 } else {
                     Toast.makeText(getApplicationContext(), "POR FAVOR PREENCHA TODOS OS CAMPOS", Toast.LENGTH_SHORT).show();

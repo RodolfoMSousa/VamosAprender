@@ -2,6 +2,7 @@ package tcc.faculdade.com.vamosaprender.app.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,11 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.loginId);
         novoUsuario = findViewById(R.id.BotaoNovoUsuarioId);
 
+        SharedPreferences loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = loginArmazenado.edit();
+
+        userName.setText(loginArmazenado.getString("userName",""));
+        password.setText(loginArmazenado.getString("senha",""));
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                             .getLogin(userName.getText().toString(),
                                     password.getText().toString());
 
+
                     call.enqueue(new Callback<Login>() {
                         @Override
                         public void onResponse(Call<Login> call, Response<Login> response) {
@@ -58,6 +65,15 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.e("RESPOSTA: ", l.getUserName());
                                 if (l != null) {
                                     Log.e("Autenticado", "login autenticado");
+
+                                    //Salvando o Login e senha no SharedPreferences
+                                    editor.putString("userName", userName.getText().toString());
+                                    editor.putString("senha", password.getText().toString());
+                                    editor.commit();
+
+                                    //Proxima Activity
+                                    startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
                                     //**********AQUI CHAMO O BANCO
                                     try {
                                         db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
@@ -67,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                         // db.execSQL("INSERT INTO login(usuarioId, userName, senha) VALUES ('" + l.getUsuarioId() + "','" + l.getUserName() + "','" + l.getSenha() + "')");
                                         db.execSQL("INSERT INTO login(usuarioId, userName, senha) SELECT " + l.getUsuarioId() + ",'" + l.getUserName() + "','" + l.getSenha() + "'" +
                                                 " WHERE NOT EXISTS(SELECT 1 FROM login WHERE usuarioId = " + l.getUsuarioId() + ")");
+
 
                                     } catch (Exception e) {
                                         e.printStackTrace();
