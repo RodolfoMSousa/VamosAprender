@@ -38,11 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         login = findViewById(R.id.loginId);
         novoUsuario = findViewById(R.id.BotaoNovoUsuarioId);
 
-        SharedPreferences loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
+        final SharedPreferences loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
         final SharedPreferences.Editor editor = loginArmazenado.edit();
 
         userName.setText(loginArmazenado.getString("userName",""));
         password.setText(loginArmazenado.getString("senha",""));
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                             .getLoginService()
                             .getLogin(userName.getText().toString(),
                                     password.getText().toString());
+
 
 
                     call.enqueue(new Callback<Login>() {
@@ -67,6 +69,13 @@ public class LoginActivity extends AppCompatActivity {
                                     //Salvando o Login e senha no SharedPreferences
                                     editor.putString("userName", userName.getText().toString());
                                     editor.putString("senha", password.getText().toString());
+                                    editor.putString("Nome", null);
+                                    editor.putString("Sobrenome", null);
+                                    //***IF PRA GARANTIR QUE É A PRIMEIRA VEZ
+                                    editor.putInt("id", l.getUsuarioId());
+                                    if(loginArmazenado.getInt("ePrimeira",0) != loginArmazenado.getInt("id",444)){
+                                        editor.putInt("ePrimeira",4444);
+                                    }
                                     editor.commit();
 
                                     //**********AQUI CHAMO O BANCO

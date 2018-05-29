@@ -117,6 +117,9 @@ public class NewUserActivity extends AppCompatActivity {
                             //Salvando o Login e senha no SharedPreferences
                             editor.putString("userName", novoUsuId.getText().toString());
                             editor.putString("senha", novaSenhaId.getText().toString());
+                            editor.putString("Nome", null);
+                            editor.putString("Sobrenome", null);
+                            editor.putInt("id", login.getUsuarioId());
                             editor.commit();
 
                             //**********AQUI CHAMO O BANCO
