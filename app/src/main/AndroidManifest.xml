@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionbar">
         <activity
-            android:name=".app.activity.LoginActivity"
+            android:name=".app.activity.MainActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,10 +20,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".app.activity.MainActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".app.activity.NewUserActivity"
-            android:screenOrientation="landscape"></activity>
+
+        <activity
+            android:name=".app.activity.NewUserActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".app.activity.ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/NoActionbar" />
+        <activity
+            android:name=".app.activity.LoginActivity"
+            android:label="@string/title_activity_game_fracionando"
+            android:theme="@style/NoActionbar" />
+        <activity
+            android:name=".app.activity.GameOperacoes"
+            android:screenOrientation="landscape"
+            android:theme="@style/NoActionbar" />
     </application>
 
 </manifest>

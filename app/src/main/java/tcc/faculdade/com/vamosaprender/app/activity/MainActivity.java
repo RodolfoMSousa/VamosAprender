@@ -1,12 +1,14 @@
 package tcc.faculdade.com.vamosaprender.app.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -36,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         name = findViewById(R.id.name);
         Button play =  findViewById(R.id.playButton);
-        Button stop =  findViewById(R.id.profileButton);
+        Button profile =  findViewById(R.id.profileButton);
         db = openOrCreateDatabase("TCC",Context.MODE_PRIVATE, null);
 
         final SharedPreferences loginArmazenado= getSharedPreferences("loginArmazenado", MODE_PRIVATE);
@@ -73,6 +75,19 @@ public class MainActivity extends AppCompatActivity {
 
         }
         starAnimations();
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent());
+            }
+        });
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,GameOperacoes.class));
+            }
+        });
     }
 
 
@@ -91,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationStart(Animation animation) {
                 Resources res = getResources();
                 String[] phrases = res.getStringArray(R.array.start_prhases);
-                speechPrhases.setText(phrases[0] + " " + loginArmazenado.getString("nome","Aluno"));
+                speechPrhases.setText("Olá " + loginArmazenado.getString("nome","Aluno") + "," +phrases[1] );
                 speechPrhases.setAlpha((float) 1.0);
                 speechPrhases.startAnimation(phraseAnim);
             }

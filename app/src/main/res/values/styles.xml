@@ -14,8 +14,19 @@
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:background">@drawable/buttons_main_screen</item>
     </style>
+
     <style name="NameProfileMainScreen">
         <item name="android:background">@drawable/text_name_profile</item>
+    </style>
+
+    <style name="NoActionbar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="NoActionbar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="BordasOperacoes">
+
+
+        <item name="android:background">@drawable/operacoes_bordas</item>
     </style>
 
 </resources>
