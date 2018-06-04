@@ -18,4 +18,8 @@
     </string-array>
     <string name="new_record">Novo Record!!  %1$d</string>
     <string name="record">Pontuação: %1$d</string>
+    <string-array name="main_screen_onRestart">
+        <item>%1$s , parabéns pela dedicação. Continue praticando!!!</item>
+        <item>Mantenha sempre o foco %1$s ,assim você alcançará seus objetivos!!!</item>
+    </string-array>
 </resources>

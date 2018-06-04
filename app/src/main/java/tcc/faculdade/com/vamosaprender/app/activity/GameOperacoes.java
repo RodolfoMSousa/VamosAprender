@@ -1,8 +1,10 @@
 package tcc.faculdade.com.vamosaprender.app.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -31,10 +33,12 @@ public class GameOperacoes extends AppCompatActivity {
     private Typeface font;
     Resources res;
     String[] phrases;
-    private int i, ciclo,score,highScore;
+    private int i, ciclo,score,highScore,acertos,erros,jogoId;
     private Button ex,op1,op2,op3,op4;
     SharedPreferences scoreSalvo;
+    SharedPreferences usuarioSalvo;
     SharedPreferences.Editor editor;
+    public SQLiteDatabase db;
 
 
     @Override
@@ -46,6 +50,7 @@ public class GameOperacoes extends AppCompatActivity {
     }
 
     private void init(){
+        jogoId = 1;
         scoreSalvo = getSharedPreferences("scoreGameOperacoes", MODE_PRIVATE);
         editor = scoreSalvo.edit();
         speechPrhases = findViewById(R.id.speechPhrases);
@@ -61,7 +66,7 @@ public class GameOperacoes extends AppCompatActivity {
         scoreText.setText(""+score);
         contagem = findViewById(R.id.contagem);
         highScore = i = 0;
-        ciclo = 0;
+        acertos = erros = ciclo = 0;
         res = getResources();
         phrases = res.getStringArray(R.array.game_operacoes);
         ex = findViewById(R.id.containeroOperacaoId);
@@ -484,7 +489,7 @@ public class GameOperacoes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(Integer.parseInt(op1.getText().toString()) == resultado){
-
+                    acertos++;
                     score += 50;
                     scoreText.setText(""+score);
                     if(ciclo ==15){
@@ -492,6 +497,7 @@ public class GameOperacoes extends AppCompatActivity {
                     }
                     gameAnimations();
                 }else{
+                    erros++;
                     Toast.makeText(getApplicationContext(),"Resposta Errada",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
@@ -507,7 +513,7 @@ public class GameOperacoes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(Integer.parseInt(op2.getText().toString()) == resultado){
-
+                    acertos++;
                     score += 50;
                     scoreText.setText(""+score);
                     if(ciclo ==15){
@@ -515,6 +521,7 @@ public class GameOperacoes extends AppCompatActivity {
                     }
                     gameAnimations();
                 }else{
+                    erros++;
                     Toast.makeText(getApplicationContext(),"Tente Novamente",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
@@ -530,7 +537,7 @@ public class GameOperacoes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(Integer.parseInt(op3.getText().toString()) == resultado){
-
+                    acertos++;
                     score += 50;
                     scoreText.setText(""+score);
                     if(ciclo ==15){
@@ -538,6 +545,7 @@ public class GameOperacoes extends AppCompatActivity {
                     }
                     gameAnimations();
                 }else{
+                    erros++;
                     Toast.makeText(getApplicationContext(),"Refaça as contas",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
@@ -553,7 +561,7 @@ public class GameOperacoes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if(Integer.parseInt(op4.getText().toString()) == resultado){
-
+                    acertos++;
                     score += 50;
                     scoreText.setText(""+score);
                     if(ciclo ==15){
@@ -561,6 +569,7 @@ public class GameOperacoes extends AppCompatActivity {
                     }
                     gameAnimations();
                 }else{
+                    erros++;
                     Toast.makeText(getApplicationContext(),"Tente outra vez",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
@@ -581,8 +590,27 @@ public class GameOperacoes extends AppCompatActivity {
            Toast.makeText(getApplicationContext(),"novo record",Toast.LENGTH_SHORT).show();
            Intent it = new Intent(GameOperacoes.this,GameOperacoesResumoActivity.class);
            it.putExtra("score",score);
+           salvaScore();
            startActivity(it);
            finish();
        }
+    }
+
+    public void salvaScore(){
+        SharedPreferences usuarioSalvo = getSharedPreferences("loginArmazenado", MODE_PRIVATE);;
+
+        try {
+            db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
+            //db.execSQL("DROP TABLE login");
+            db.execSQL("CREATE TABLE IF NOT EXISTS score " +
+                    "(scoreId INTEGER PRIMARY KEY AUTOINCREMENT, jogoId INTEGER , alunoId INTEGER, pontuacao INTEGER, dataCadastro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, categoriaId INTEGER)");
+            // db.execSQL("INSERT INTO login(usuarioId, userName, senha) VALUES ('" + l.getUsuarioId() + "','" + l.getUserName() + "','" + l.getSenha() + "')");
+            db.execSQL("INSERT INTO score(jogoId, alunoId, pontuacao, categoriaId) VALUES ('" + jogoId + "','" + usuarioSalvo.getInt("id",0) + "','" + score +  "','"+ 1 +"')");
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

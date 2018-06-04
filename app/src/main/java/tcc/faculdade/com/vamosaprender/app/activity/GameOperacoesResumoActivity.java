@@ -3,6 +3,7 @@ package tcc.faculdade.com.vamosaprender.app.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,7 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
     private int score;
     SharedPreferences scoreSalvo;
     SharedPreferences.Editor editor;
+    Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
         phrases = res.getStringArray(R.array.end_game_operacoes);
         restartBtn.setEnabled(false);
         endGameBtn.setEnabled(false);
+       // font = Typeface.createFromAsset(getAssets(), "fonts/OpenSansRegular.ttf");
+      //  newRecordTxt.setTypeface(font);
 
         init();
     }
@@ -106,9 +110,6 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         speechText.setVisibility(View.GONE);
                         speechBubble.setVisibility(View.GONE);
-                        star1.setVisibility(View.GONE);
-                        star2.setVisibility(View.GONE);
-                        star3.setVisibility(View.GONE);
                         next.setVisibility(View.GONE);
                         if(score <= scoreSalvo.getInt("HighScore",0)) {
                             newRecordTxt.setText(String.format(res.getString(R.string.record),score));

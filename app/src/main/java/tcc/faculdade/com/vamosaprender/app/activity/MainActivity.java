@@ -119,9 +119,11 @@ public class MainActivity extends AppCompatActivity {
         bubble.startAnimation(bubbleAnim);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
 
 
-
-
+    }
 }
 
