@@ -7,16 +7,12 @@ import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -37,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         name = findViewById(R.id.name);
-        Button play =  findViewById(R.id.playButton);
-        Button profile =  findViewById(R.id.profileButton);
+        Button play =  findViewById(R.id.replayButton);
+        Button profile =  findViewById(R.id.endGameButton);
         db = openOrCreateDatabase("TCC",Context.MODE_PRIVATE, null);
 
         final SharedPreferences loginArmazenado= getSharedPreferences("loginArmazenado", MODE_PRIVATE);

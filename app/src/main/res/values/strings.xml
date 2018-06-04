@@ -10,6 +10,12 @@
     <string-array name="game_operacoes">
         <item>Olá, vamos agora ao jogo "OPERAÇÔES", onde você irá praticar e desenvolver suas habilidades matemáticas.</item>
         <item>Você só precisa realizar as operações e escolher o resultado correto, leve o tempo que precisar.</item>
-        <item>teste</item>
     </string-array>
+    <string-array name="end_game_operacoes">
+        <item>Muito bem, lembre-se sempre de praticar para obter melhores resultados.</item>
+        <item>Parabéns, você esta quase dominando as operações, com um pouco mais de prática você chega lá.</item>
+        <item>Uooou, meus parabéns, você mostrou que domina as operações</item>
+    </string-array>
+    <string name="new_record">Novo Record!!  %1$d</string>
+    <string name="record">Pontuação: %1$d</string>
 </resources>

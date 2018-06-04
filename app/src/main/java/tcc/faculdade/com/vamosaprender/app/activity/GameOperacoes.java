@@ -1,5 +1,7 @@
 package tcc.faculdade.com.vamosaprender.app.activity;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -7,6 +9,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -28,8 +31,11 @@ public class GameOperacoes extends AppCompatActivity {
     private Typeface font;
     Resources res;
     String[] phrases;
-    private int i, ciclo,score;
+    private int i, ciclo,score,highScore;
     private Button ex,op1,op2,op3,op4;
+    SharedPreferences scoreSalvo;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +46,8 @@ public class GameOperacoes extends AppCompatActivity {
     }
 
     private void init(){
+        scoreSalvo = getSharedPreferences("scoreGameOperacoes", MODE_PRIVATE);
+        editor = scoreSalvo.edit();
         speechPrhases = findViewById(R.id.speechPhrases);
         bubble = findViewById(R.id.speechBubble);
         next = findViewById(R.id.nextId);
@@ -47,12 +55,12 @@ public class GameOperacoes extends AppCompatActivity {
         font = Typeface.createFromAsset(getAssets(), "fonts/iceland.ttf");
         titulo = findViewById(R.id.tituloGame);
         titulo.setTypeface(font);
-        titulo.setTextColor(Color.BLUE);
+        titulo.setTextColor(Color.BLACK);
         scoreText = findViewById(R.id.score);
         score = 0;
         scoreText.setText(""+score);
         contagem = findViewById(R.id.contagem);
-        i = 0;
+        highScore = i = 0;
         ciclo = 0;
         res = getResources();
         phrases = res.getStringArray(R.array.game_operacoes);
@@ -131,16 +139,12 @@ public class GameOperacoes extends AppCompatActivity {
                 ex.setVisibility(View.VISIBLE);
                 ex.setEnabled(false);
                 op1.setVisibility(View.VISIBLE);
-                op1.setEnabled(true);
                 op1.setBackgroundResource(R.drawable.operacoes_bordas);
                 op2.setVisibility(View.VISIBLE);
-                op2.setEnabled(true);
                 op2.setBackgroundResource(R.drawable.operacoes_bordas);
                 op3.setVisibility(View.VISIBLE);
-                op3.setEnabled(true);
                 op3.setBackgroundResource(R.drawable.operacoes_bordas);
                 op4.setVisibility(View.VISIBLE);
-                op4.setEnabled(true);
                 op4.setBackgroundResource(R.drawable.operacoes_bordas);
                 ciclo++;
                 contagem.setText(""+ciclo);
@@ -149,7 +153,10 @@ public class GameOperacoes extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-
+                op1.setEnabled(true);
+                op2.setEnabled(true);
+                op3.setEnabled(true);
+                op4.setEnabled(true);
             }
 
             @Override
@@ -326,9 +333,10 @@ public class GameOperacoes extends AppCompatActivity {
             operacao = random.nextInt(2);
             //if 0 multiplicação
             if(operacao == 0){
-                operando1 = random.nextInt(9)+1;
+
                 operacao = random.nextInt(2);
                 if(operacao == 0){
+                    operando1 = random.nextInt(9)+1;
                     operando2 = random.nextInt(9)+1;
                     operando3 = random.nextInt(9)+1;
                     resultado = operando1 * operando2 * operando3;
@@ -336,7 +344,7 @@ public class GameOperacoes extends AppCompatActivity {
 
                     auxResul = resultado + random.nextInt(8)+1;
                     op1.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(5)+1;
+                    auxResul = resultado + random.nextInt(9)+1;
                     op2.setText(""+auxResul);
                     auxResul = resultado + random.nextInt(7)+1;
                     op3.setText(""+auxResul);
@@ -357,10 +365,21 @@ public class GameOperacoes extends AppCompatActivity {
                             break;
                     }
                 }else{
-                    operando2 = random.nextInt(9)+1;
-                    auxResul = operando1*operando2;
+                    int divisore[] = new int[100];
+                    int con = 0, a;
                     resultado = random.nextInt(9)+1;
-                    operando3 = auxResul/resultado;
+                    operando3 = random.nextInt(9)+1;
+                    auxResul = resultado * operando3;
+                    for(int c = 1; c <= auxResul; c++){
+                        if(auxResul % c == 0){
+                            divisore[con] = c;
+                            con++;
+                        }
+                    }
+                    a = random.nextInt(con);
+                    operando2 = divisore[a];
+                    operando1 = auxResul / operando2;
+
                     ex.setText(operando1+" * "+operando2+ " : "+ operando3);
 
                     auxResul = resultado + random.nextInt(8)+1;
@@ -389,12 +408,14 @@ public class GameOperacoes extends AppCompatActivity {
             }
             //Começou com divisão
             else{
-                auxResul = random.nextInt(8)+1;
-                operando2 = random.nextInt(8)+1;
-                operando1 = auxResul * operando2;
+
                 operacao = random.nextInt(2);
                 if(operacao == 0){
-                    operando3 = random.nextInt(8)+1;
+                    auxResul = random.nextInt(9)+1;
+                    operando2 = random.nextInt(9)+1;
+                    operando1 = auxResul * operando2;
+
+                    operando3 = random.nextInt(9)+1;
                     resultado = auxResul * operando3;
                     ex.setText(operando1+" : "+operando2+ " * "+ operando3);
 
@@ -421,8 +442,12 @@ public class GameOperacoes extends AppCompatActivity {
                             break;
                     }
                 }else{
-                    resultado = random.nextInt(8)+1;
-                    operando3 = auxResul/resultado;
+                    resultado = random.nextInt(9)+1;
+                    operando3 = random.nextInt(9)+1;
+                    auxResul = resultado * operando3;
+                    operando2 = random.nextInt(9)+1;
+                    operando1 = auxResul * operando2;
+
                     ex.setText(operando1+" : "+operando2+ " : "+ operando3);
 
                     auxResul = resultado + random.nextInt(8)+1;
@@ -462,10 +487,12 @@ public class GameOperacoes extends AppCompatActivity {
 
                     score += 50;
                     scoreText.setText(""+score);
-
+                    if(ciclo ==15){
+                        endGame();
+                    }
                     gameAnimations();
                 }else{
-                    Toast.makeText(getApplicationContext(),"errou",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Resposta Errada",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
                         score = 0;
@@ -483,10 +510,12 @@ public class GameOperacoes extends AppCompatActivity {
 
                     score += 50;
                     scoreText.setText(""+score);
-
+                    if(ciclo ==15){
+                        endGame();
+                    }
                     gameAnimations();
                 }else{
-                    Toast.makeText(getApplicationContext(),"errou",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Tente Novamente",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
                         score = 0;
@@ -504,10 +533,12 @@ public class GameOperacoes extends AppCompatActivity {
 
                     score += 50;
                     scoreText.setText(""+score);
-
+                    if(ciclo ==15){
+                        endGame();
+                    }
                     gameAnimations();
                 }else{
-                    Toast.makeText(getApplicationContext(),"errou",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Refaça as contas",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
                         score = 0;
@@ -525,10 +556,12 @@ public class GameOperacoes extends AppCompatActivity {
 
                     score += 50;
                     scoreText.setText(""+score);
-
+                    if(ciclo ==15){
+                        endGame();
+                    }
                     gameAnimations();
                 }else{
-                    Toast.makeText(getApplicationContext(),"errou",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"Tente outra vez",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
                         score = 0;
@@ -539,5 +572,17 @@ public class GameOperacoes extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void endGame(){
+       if(highScore < score) {
+           editor.putInt("HighScore", score);
+           editor.commit();
+           Toast.makeText(getApplicationContext(),"novo record",Toast.LENGTH_SHORT).show();
+           Intent it = new Intent(GameOperacoes.this,GameOperacoesResumoActivity.class);
+           it.putExtra("score",score);
+           startActivity(it);
+           finish();
+       }
     }
 }
