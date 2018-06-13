@@ -1,17 +1,13 @@
 package tcc.faculdade.com.vamosaprender.app.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -153,7 +149,7 @@ public class GameOperacoes extends AppCompatActivity {
                 op4.setBackgroundResource(R.drawable.operacoes_bordas);
                 ciclo++;
                 contagem.setText(""+ciclo);
-                geraOperações();
+                geraOperacoes();
             }
 
             @Override
@@ -177,7 +173,7 @@ public class GameOperacoes extends AppCompatActivity {
 
     }
 
-    private void geraOperações(){
+    private void geraOperacoes(){
         Random random = new Random();
         int operacao,operando1,operando2,resultado ,auxResul,operando3;
         //caso menos que 6 é o primeiro cilco, entao vem as mais fáceis
@@ -590,13 +586,13 @@ public class GameOperacoes extends AppCompatActivity {
            Toast.makeText(getApplicationContext(),"novo record",Toast.LENGTH_SHORT).show();
            Intent it = new Intent(GameOperacoes.this,GameOperacoesResumoActivity.class);
            it.putExtra("score",score);
-           salvaScore();
+           //salvaScore();
            startActivity(it);
            finish();
        }
     }
 
-    public void salvaScore(){
+    /*public void salvaScore(){
         SharedPreferences usuarioSalvo = getSharedPreferences("loginArmazenado", MODE_PRIVATE);;
 
         try {
@@ -612,5 +608,5 @@ public class GameOperacoes extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

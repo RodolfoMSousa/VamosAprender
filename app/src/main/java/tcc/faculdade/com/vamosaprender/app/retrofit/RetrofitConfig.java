@@ -7,6 +7,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import tcc.faculdade.com.vamosaprender.app.servicos.LoginService;
+import tcc.faculdade.com.vamosaprender.app.servicos.ScoreService;
 
 public class RetrofitConfig {
 
@@ -33,7 +34,7 @@ public class RetrofitConfig {
         return this.retrofit.create(LoginService.class);
     }
 
-
+    public ScoreService setScoreService(){return this.retrofit.create(ScoreService.class);}
 
 
 }
