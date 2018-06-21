@@ -11,6 +11,9 @@ import tcc.faculdade.com.vamosaprender.app.entidades.Score;
 
 public interface ScoreService {
 
-    @POST("scorews/")
-    Call<List<Score>> setScore(@Body RequestBody json);
+    @POST("score/")
+    Call<Score> setScore(@Body RequestBody json);
+
+    @POST("score/list")
+    Call<List<Score>> setScoreList(@Body RequestBody json);
 }

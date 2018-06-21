@@ -69,6 +69,7 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
 
         init();
     }
+
     private void init(){
         loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
         db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
@@ -184,22 +185,28 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
         s.setAlunoId(loginArmazenado.getInt("id", 0));
         scoreArrayList.add(s);
 
-        String json = gson.toJson(scoreArrayList);
+
+        String json = gson.toJson(s);
         requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-        Call<List<Score>> call = new RetrofitConfig()
+        Call<Score> call = new RetrofitConfig()
                 .setScoreService()
                 .setScore(requestBody);
 
-
-        call.enqueue(new Callback<List<Score>>() {
+        call.enqueue(new Callback<Score>() {
             @Override
-            public void onResponse(Call<List<Score>> call, Response<List<Score>> response) {
-                Log.i("Body da resposta pont: ",""+response.body().get(0).getPontuacao());
+            public void onResponse(Call<Score> call, Response<Score> response) {
+               // Log.i("Body da resposta pont: ",""+response.body().getPontuacao());
+                if(response.isSuccessful()){
 
+                }else{
+                    Log.e("Else que onFailure: ",""+s.getJogoId());
+                    Throwable t = new Exception();
+                    onFailure(call,t);
+                }
             }
 
             @Override
-            public void onFailure(Call<List<Score>> call, Throwable t) {
+            public void onFailure(Call<Score> call, Throwable t) {
                 MainActivity.bancoSincronizado = false;
                 try {
 

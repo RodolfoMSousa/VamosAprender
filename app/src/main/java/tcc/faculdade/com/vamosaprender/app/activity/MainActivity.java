@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         starAnimations();
-        sincronizaBanco(bancoSincronizado);
+     //   sincronizaBanco(bancoSincronizado);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
-
         sincronizaBanco(bancoSincronizado);
     }
 
@@ -186,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
             requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
 
             Call<List<Score>> call = new RetrofitConfig()
-                                    .setScoreService()
-                                    .setScore(requestBody);
+                                    .setScoreListService()
+                                    .setScoreList(requestBody);
             Log.e("1", " 1");
 
 
@@ -208,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<List<Score>> call, Throwable t) {
                         Log.e("2", " 2");
-                        Log.e("Failure", "Ao inserir novo score ");
+                        Log.e("Failure", "Ao sincronizar novo score ");
                     }
                 });
 

@@ -10,7 +10,7 @@ package tcc.faculdade.com.vamosaprender.app.entidades;
  * @author Rodolfo
  */
 public class Score {
-    private int scoreId, jogoId,alunoId, pontuacao, categoriaId;
+    private int  jogoI ,alunoI, pontuacao, categoriaI;
     
     public Score(){
         
@@ -23,46 +23,33 @@ public class Score {
         setCategoriaId(categoriaId);
     }
 
-    /**
-     * @return the scoreId
-     */
-    public int getScoreId() {
-        return scoreId;
-    }
-
-    /**
-     * @param scoreId the scoreId to set
-     */
-    public void setScoreId(int scoreId) {
-        this.scoreId = scoreId;
-    }
 
     /**
      * @return the jogoId
      */
     public int getJogoId() {
-        return jogoId;
+        return jogoI;
     }
 
     /**
      * @param jogoId the jogoId to set
      */
     public void setJogoId(int jogoId) {
-        this.jogoId = jogoId;
+        this.jogoI = jogoId;
     }
 
     /**
      * @return the alunoId
      */
     public int getAlunoId() {
-        return alunoId;
+        return alunoI;
     }
 
     /**
      * @param alunoId the alunoId to set
      */
     public void setAlunoId(int alunoId) {
-        this.alunoId = alunoId;
+        this.alunoI = alunoId;
     }
 
     /**
@@ -97,13 +84,13 @@ public class Score {
      * @return the categoriaId
      */
     public int getCategoriaId() {
-        return categoriaId;
+        return categoriaI;
     }
 
     /**
      * @param categoriaId the categoriaId to set
      */
     public void setCategoriaId(int categoriaId) {
-        this.categoriaId = categoriaId;
+        this.categoriaI = categoriaId;
     }
 }

@@ -1,5 +1,6 @@
 package tcc.faculdade.com.vamosaprender.app.retrofit;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
@@ -25,7 +26,7 @@ public class RetrofitConfig {
 
         this.retrofit = new Retrofit.Builder()
                 .client(httpClient.build())
-                .baseUrl("http://192.168.1.4:8080/WebServiceTCC/webresources/")
+                .baseUrl("http://192.168.1.2:8080/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
@@ -35,6 +36,8 @@ public class RetrofitConfig {
     }
 
     public ScoreService setScoreService(){return this.retrofit.create(ScoreService.class);}
+
+    public ScoreService setScoreListService(){return this.retrofit.create(ScoreService.class);}
 
 
 }
