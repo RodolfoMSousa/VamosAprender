@@ -25,7 +25,7 @@
         android:layout_marginEnd="450dp"
         android:layout_marginRight="450dp"
         android:layout_marginTop="45dp"
-        android:text="Sobrenome"
+        android:text="Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -64,14 +64,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/novoSobrenomeId"
+        android:id="@+id/novoEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="200dp"
         android:layout_marginRight="200dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/novoNomeId" />
 
@@ -85,7 +85,7 @@
         android:ems="10"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/novoSobrenomeId" />
+        app:layout_constraintTop_toBottomOf="@+id/novoEmail" />
 
     <EditText
         android:id="@+id/novaSenhaId"

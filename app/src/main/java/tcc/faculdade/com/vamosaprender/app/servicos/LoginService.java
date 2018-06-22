@@ -16,20 +16,17 @@ import tcc.faculdade.com.vamosaprender.app.entidades.Usuario;
 
 public interface LoginService {
 
-    @GET("login/")
-    Call<Login> getLogin(@Query("userName") String userName,
-                         @Query("password") String password);
+    @POST("aluno/login/")
+    Call<Aluno> getLogin(@Body RequestBody json);
 
 
-
-
-    @POST("userWS/setAluno/")
-    Call<Aluno> setAluno(@Body RequestBody json);
-
-    @POST("login/")
-    Call<Login> setLogin(@Body RequestBody json);
-
-    @GET("userWS/{id}")
-    Call<Usuario> getUsuario(@Path("id")int id);
+    @POST("aluno/")
+    Call<Aluno> setLogin(@Body RequestBody json);
+//
+//    @POST("login/")
+//    Call<Login> setLogin(@Body RequestBody json);
+//
+//    @GET("userWS/{id}")
+//    Call<Usuario> getUsuario(@Path("id")int id);
 
 }

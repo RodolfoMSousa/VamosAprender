@@ -182,6 +182,7 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
         s.setPontuacao(score);
         s.setJogoId(1);
         s.setCategoriaId(1);
+       // s.setAlunoId(2);
         s.setAlunoId(loginArmazenado.getInt("id", 0));
         scoreArrayList.add(s);
 

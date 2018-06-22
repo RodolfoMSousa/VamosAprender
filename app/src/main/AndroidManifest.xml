@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/NoActionbar">
         <activity
-            android:name=".app.activity.MainActivity"
+            android:name=".app.activity.LoginActivity"
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,10 +26,12 @@
         <activity
             android:name=".app.activity.ProfileActivity"
             android:label="@string/title_activity_profile"
+            android:screenOrientation="landscape"
             android:theme="@style/NoActionbar" />
         <activity
-            android:name=".app.activity.LoginActivity"
+            android:name=".app.activity.MainActivity"
             android:label="@string/title_activity_game_fracionando"
+            android:screenOrientation="landscape"
             android:theme="@style/NoActionbar" />
         <activity
             android:name=".app.activity.GameOperacoes"

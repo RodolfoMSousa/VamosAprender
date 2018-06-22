@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     SQLiteDatabase db;
     RequestBody requestBody = null;
 
-    SharedPreferences loginArmazenado ;
-    SharedPreferences.Editor editor ;
+    SharedPreferences loginArmazenado;
+    SharedPreferences.Editor editor;
 
 
     @Override
@@ -54,9 +54,9 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.setThreadPolicy(policy);
 
         name = findViewById(R.id.name);
-        Button play =  findViewById(R.id.replayButton);
-        Button profile =  findViewById(R.id.endGameButton);
-        db = openOrCreateDatabase("TCC",Context.MODE_PRIVATE, null);
+        Button play = findViewById(R.id.replayButton);
+        Button profile = findViewById(R.id.endGameButton);
+        db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
 
 
         bancoSincronizado = false;
@@ -64,38 +64,10 @@ public class MainActivity extends AppCompatActivity {
         loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
         editor = loginArmazenado.edit();
 
-        //*****O IF GARENTE QUE A REQUISIÇÃO DE USUARIO SÓ SERÁ FEITA NA PRIMEIRA VEZ QUE USAR O APP
-        if(loginArmazenado.getString("nome",null) == null
-                || loginArmazenado.getInt("ePrimeira",0 )!= loginArmazenado.getInt("id",0)) {
 
-            Call<Usuario> usuarioCall = new RetrofitConfig()
-                    .getLoginService()
-                    .getUsuario(loginArmazenado.getInt("id", 0));
-
-            usuarioCall.enqueue(new Callback<Usuario>() {
-                @Override
-                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
-                    Usuario usuario = response.body();
-                    editor.putString("nome", usuario.getNome());
-                    editor.putString("sobrenome", usuario.getSobrenome());
-                    editor.putInt("ePrimeira",usuario.getUserId());
-                    editor.commit();
-                    name.setText(loginArmazenado.getString("nome","Aluno")+" "+
-                            loginArmazenado.getString("sobrenome",""));
-                }
-
-                @Override
-                public void onFailure(Call<Usuario> call, Throwable t) {
-
-                }
-            });
-        }else{
-            name.setText(loginArmazenado.getString("nome","Aluno")+" "+
-                    loginArmazenado.getString("sobrenome",""));
-
-        }
+        name.setText(loginArmazenado.getString("Nome",""));
         starAnimations();
-     //   sincronizaBanco(bancoSincronizado);
+        //   sincronizaBanco(bancoSincronizado);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,GameOperacoes.class));
+                startActivity(new Intent(MainActivity.this, GameOperacoes.class));
             }
         });
     }
@@ -119,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         final Animation bubbleAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
         final Animation phraseAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
 
-        final SharedPreferences loginArmazenado= getSharedPreferences("loginArmazenado", MODE_PRIVATE);
+        final SharedPreferences loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
 
         bubble.setAlpha((float) 1.0);
         bubbleAnim.setAnimationListener(new Animation.AnimationListener() {
@@ -127,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onAnimationStart(Animation animation) {
                 Resources res = getResources();
                 String[] phrases = res.getStringArray(R.array.start_prhases);
-                speechPrhases.setText("Olá " + loginArmazenado.getString("nome","Aluno") + "," +phrases[1] );
+                speechPrhases.setText("Olá " + loginArmazenado.getString("Nome", "Aluno") + ", " + phrases[1]);
                 speechPrhases.setAlpha((float) 1.0);
                 speechPrhases.startAnimation(phraseAnim);
             }
@@ -151,22 +123,22 @@ public class MainActivity extends AppCompatActivity {
         sincronizaBanco(bancoSincronizado);
     }
 
-    public void sincronizaBanco(Boolean bancoSinc){
+    public void sincronizaBanco(Boolean bancoSinc) {
 
-        if(!bancoSinc){
+        if (!bancoSinc) {
             Gson gson = new Gson();
             Response<Score> responseScore = null;
-            Score score ;
+            Score score;
             List<Score> scorelist = new ArrayList<>();
             try {
-                Cursor cursor = db.rawQuery("SELECT * FROM score WHERE alunoId = "+
+                Cursor cursor = db.rawQuery("SELECT * FROM score WHERE alunoId = " +
                         loginArmazenado.getInt("id", 0), null);
                 cursor.moveToFirst();
                 while (cursor.getCount() > cursor.getPosition()) {
-                    Log.e("alunoId: ", ""+cursor.getInt(cursor.getColumnIndex("alunoId")));
-                    Log.e("jogoId: ",""+ cursor.getInt(cursor.getColumnIndex("jogoId")));
-                    Log.e("pontuacao: ", ""+cursor.getInt(cursor.getColumnIndex("pontuacao")));
-                    Log.e("categoriaId: ", ""+cursor.getInt(cursor.getColumnIndex("categoriaId")));
+                    Log.e("alunoId: ", "" + cursor.getInt(cursor.getColumnIndex("alunoId")));
+                    Log.e("jogoId: ", "" + cursor.getInt(cursor.getColumnIndex("jogoId")));
+                    Log.e("pontuacao: ", "" + cursor.getInt(cursor.getColumnIndex("pontuacao")));
+                    Log.e("categoriaId: ", "" + cursor.getInt(cursor.getColumnIndex("categoriaId")));
                     score = new Score();
                     score.setAlunoId(cursor.getInt(cursor.getColumnIndex("alunoId")));
                     score.setCategoriaId(cursor.getInt(cursor.getColumnIndex("categoriaId")));
@@ -176,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     cursor.moveToNext();
                 }
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 Log.e("catch sincroniza", "deu ruim");
                 e.printStackTrace();
             }
@@ -185,37 +157,31 @@ public class MainActivity extends AppCompatActivity {
             requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
 
             Call<List<Score>> call = new RetrofitConfig()
-                                    .setScoreListService()
-                                    .setScoreList(requestBody);
+                    .setScoreListService()
+                    .setScoreList(requestBody);
             Log.e("1", " 1");
 
 
-                call.enqueue(new Callback<List<Score>>() {
-                    @Override
-                    public void onResponse(Call<List<Score>> call, Response<List<Score>> response) {
-                        try {
-                            Log.e("Inserido", "Scores inseridos com sucesso ");
-                            bancoSincronizado = true;
-                            db.execSQL("DROP TABLE score");
-                            Log.e("7", "77");
-                        }catch (Exception e){
-                            Log.e("3", " 3");
-                            e.printStackTrace();
-                        }
+            call.enqueue(new Callback<List<Score>>() {
+                @Override
+                public void onResponse(Call<List<Score>> call, Response<List<Score>> response) {
+                    try {
+                        Log.e("Inserido", "Scores inseridos com sucesso ");
+                        bancoSincronizado = true;
+                        db.execSQL("DROP TABLE score");
+                        Log.e("7", "77");
+                    } catch (Exception e) {
+                        Log.e("3", " 3");
+                        e.printStackTrace();
                     }
+                }
 
-                    @Override
-                    public void onFailure(Call<List<Score>> call, Throwable t) {
-                        Log.e("2", " 2");
-                        Log.e("Failure", "Ao sincronizar novo score ");
-                    }
-                });
-
-
-
-
-
-
+                @Override
+                public void onFailure(Call<List<Score>> call, Throwable t) {
+                    Log.e("2", " 2");
+                    Log.e("Failure", "Ao sincronizar novo score ");
+                }
+            });
         }
 
     }

@@ -20,6 +20,7 @@ import java.io.IOException;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import tcc.faculdade.com.vamosaprender.R;
 import tcc.faculdade.com.vamosaprender.app.entidades.Aluno;
@@ -30,7 +31,7 @@ import tcc.faculdade.com.vamosaprender.app.retrofit.RetrofitConfig;
 public class NewUserActivity extends AppCompatActivity {
 
     EditText novoNomeId;
-    EditText novoSobrenomeId;
+    EditText novoEmail;
     EditText novoUsuId;
     EditText novaSenhaId;
     Button criarNovoUsu;
@@ -42,7 +43,7 @@ public class NewUserActivity extends AppCompatActivity {
         setContentView(R.layout.activity_new_user);
 
         novoNomeId = findViewById(R.id.novoNomeId);
-        novoSobrenomeId = findViewById(R.id.novoSobrenomeId);
+        novoEmail = findViewById(R.id.novoEmail);
         novoUsuId = findViewById(R.id.novoUusId);
         novaSenhaId = findViewById(R.id.novaSenhaId);
         criarNovoUsu = findViewById(R.id.criarNovoUsu);
@@ -58,91 +59,48 @@ public class NewUserActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Aluno aluno = null;
-                Gson gson = new Gson();
-                Usuario u = new Usuario();
-                Response<Aluno> a = null;
-                Login login = new Login();
-                Response<Login> l = null;
-
-                RequestBody requestBody = null;
-
                 if (!novoNomeId.getText().toString().equals("")
-                        && !novoSobrenomeId.getText().toString().equals("")
+                        && !novoEmail.getText().toString().equals("")
                         && !novoUsuId.getText().toString().equals("")
                         && !novaSenhaId.getText().toString().equals("")) {
 
-
-                    //Insere um novo Usuario/Aluno
-                    u.setNome(novoNomeId.getText().toString());
-                    u.setSobrenome(novoSobrenomeId.getText().toString());
-
-                    String json = gson.toJson(u);
-                    requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+                    Aluno aluno = new Aluno();
+                    Gson gson = new Gson();
+                    aluno.setNome(novoNomeId.getText().toString());
+                    aluno.setEmail(novoEmail.getText().toString());
+                    aluno.setLogin(novoUsuId.getText().toString());
+                    aluno.setSenha(novaSenhaId.getText().toString());
+                    String json = gson.toJson(aluno);
+                    RequestBody requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
 
                     Call<Aluno> call = new RetrofitConfig()
                             .getLoginService()
-                            .setAluno(requestBody);
-                    try {
-                        a = call.execute();
-                        aluno = a.body();
-                        Log.e("Inserido", "Usuario/Aluno inserido com sucesso");
-
-                    } catch (IOException e) {
-                        Log.e("CATCH", "Ao inserir novo usuario");
-                        e.printStackTrace();
-                    }
-
-
-                    //Insere um novo Login
-                    login.setUserName(novoUsuId.getText().toString());
-                    login.setSenha(novaSenhaId.getText().toString());
-                    login.setUsuarioId(aluno.getUsuarioId());
-                    json = gson.toJson(login);
-                    requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
-                    Call<Login> callLogin = new RetrofitConfig()
-                            .getLoginService()
                             .setLogin(requestBody);
-                    try {
-                        l = callLogin.execute();
-                        login = l.body();
-                        // *******Login == null significa que o userName ja existia.
-                        if (login == null) {
-                            Log.e("Login", "Usuario já existe");
-                            Toast.makeText(getApplicationContext(), "POR FAVOR ESCOLHA OUTRO NOME DE USUARIO", Toast.LENGTH_SHORT).show();
-                            login = new Login();
-                        }else{
-                            Toast.makeText(getApplicationContext(), "CADASTRO REALIZADO COM SUCESSO", Toast.LENGTH_SHORT).show();
 
-                            //Salvando o Login e senha no SharedPreferences
-                            editor.putString("userName", novoUsuId.getText().toString());
-                            editor.putString("senha", novaSenhaId.getText().toString());
-                            editor.putString("Nome", null);
-                            editor.putString("Sobrenome", null);
-                            editor.putInt("id", login.getUsuarioId());
-                            editor.commit();
+                    call.enqueue(new Callback<Aluno>() {
+                        @Override
+                        public void onResponse(Call<Aluno> call, Response<Aluno> response) {
+                            if (response.isSuccessful()) {
+                                Aluno alunoResposta = response.body();
 
-                            //**********AQUI CHAMO O BANCO
-                            SQLiteDatabase db;
-                            try {
-                                db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
-                                db.execSQL("INSERT INTO login(usuarioId, userName, senha) SELECT " + login.getUsuarioId() + ",'" + login.getUserName() + "','" + login.getSenha() + "'" +
-                                        " WHERE NOT EXISTS(SELECT 1 FROM login WHERE usuarioId = " + login.getUsuarioId() + ")");
+                                //Salvando o Login e senha no SharedPreferences
+                                editor.putString("userName", novoUsuId.getText().toString());
+                                editor.putString("senha", novaSenhaId.getText().toString());
+                                editor.putString("Nome", alunoResposta.getNome());
+                                editor.putInt("turma", alunoResposta.getTurmaId());
+                                editor.putInt("id", alunoResposta.getAlunoid());
+                                editor.commit();
 
-                                //***Após criar o Banco eu chamo a new activity
                                 startActivity(new Intent(NewUserActivity.this,MainActivity.class));
                                 finish();
-                            } catch (Exception e) {
-                                e.printStackTrace();
                             }
                         }
 
-                    } catch (IOException ex) {
-                        Log.e("CATCH", "Ao chamar a funcao para criar login");
-                        ex.printStackTrace();
-                    }
+                        @Override
+                        public void onFailure(Call<Aluno> call, Throwable t) {
 
-
+                        }
+                    });
 
                 } else {
                     Toast.makeText(getApplicationContext(), "POR FAVOR PREENCHA TODOS OS CAMPOS", Toast.LENGTH_SHORT).show();

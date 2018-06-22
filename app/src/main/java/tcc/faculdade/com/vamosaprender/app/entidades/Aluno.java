@@ -9,94 +9,61 @@ package tcc.faculdade.com.vamosaprender.app.entidades;
  *
  * @author Rodolfo
  */
-public class Aluno extends Usuario{
-    private int alunoid, usuarioId, professorId, scoreTotal, turmaId;
-    
+public class Aluno {
+    private int id, turma;
+    private String nome, email, login, senha;
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Aluno(){
         
     }
-    public Aluno(int usuarioId, String nome,String sobrenome, int cpf,
-            int dataNascimento, int ativo, int dataCadastro, int professorId, 
-            int turmaId, int alunoid, int scoreTotal){
-        super(usuarioId, nome, sobrenome, cpf, dataNascimento, ativo, 
-                dataCadastro);
-        this.alunoid = alunoid;
-        this.scoreTotal = scoreTotal;
-        this.turmaId = turmaId;
-    }
-    
-    public Aluno (Usuario u ){
-        super(u.userId, u.nome, u.sobrenome, u.cpf, u.dataNascimento, u.ativo,
-                u.dataCadastro);
+
+    public String getNome() {
+        return nome;
     }
 
-    /**
-     * @return the alunoid
-     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public int getAlunoid() {
-        return alunoid;
+
+        return id;
     }
 
-    /**
-     * @param alunoid the alunoid to set
-     */
     public void setAlunoid(int alunoid) {
-        this.alunoid = alunoid;
+        this.id = alunoid;
     }
 
-    /**
-     * @return the scoreTotal
-     */
-    public int getScoreTotal() {
-        return scoreTotal;
-    }
-
-    /**
-     * @param scoreTotal the scoreTotal to set
-     */
-    public void setScoreTotal(int scoreTotal) {
-        this.scoreTotal = scoreTotal;
-    }
-
-    /**
-     * @return the turmaId
-     */
     public int getTurmaId() {
-        return turmaId;
+        return turma;
     }
 
-    /**
-     * @param turmaId the turmaId to set
-     */
+
     public void setTurmaId(int turmaId) {
-        this.turmaId = turmaId;
-    }
-
-    /**
-     * @return the usuarioId
-     */
-    public int getUsuarioId() {
-        return usuarioId;
-    }
-
-    /**
-     * @param usuarioId the usuarioId to set
-     */
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
-    }
-
-    /**
-     * @return the professorId
-     */
-    public int getProfessorId() {
-        return professorId;
-    }
-
-    /**
-     * @param professorId the professorId to set
-     */
-    public void setProfessorId(int professorId) {
-        this.professorId = professorId;
+        this.turma = turmaId;
     }
 }

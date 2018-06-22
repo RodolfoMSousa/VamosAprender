@@ -14,7 +14,7 @@ import com.google.gson.GsonBuilder;
  */
 public class Login {
     private int usuarioId;
-    private String userName, senha;
+    private String login, senha;
     private int dataLogin;
     
     public Login(){
@@ -39,14 +39,14 @@ public class Login {
      * @return the userName
      */
     public String getUserName() {
-        return userName;
+        return login;
     }
 
     /**
      * @param userName the userName to set
      */
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.login = userName;
     }
 
     /**
@@ -82,7 +82,7 @@ public class Login {
                 "usuarioId" +
                 ":" +usuarioId+
                 "userName" +
-                ":" +userName +
+                ":" +login +
                 "senha" +
                 ":" +senha+
                 "dataLogin" +

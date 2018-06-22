@@ -494,7 +494,6 @@ public class GameOperacoes extends AppCompatActivity {
                     gameAnimations();
                 }else{
                     erros++;
-                    Toast.makeText(getApplicationContext(),"Resposta Errada",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
                         score = 0;
@@ -518,7 +517,6 @@ public class GameOperacoes extends AppCompatActivity {
                     gameAnimations();
                 }else{
                     erros++;
-                    Toast.makeText(getApplicationContext(),"Tente Novamente",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
                         score = 0;
@@ -542,7 +540,6 @@ public class GameOperacoes extends AppCompatActivity {
                     gameAnimations();
                 }else{
                     erros++;
-                    Toast.makeText(getApplicationContext(),"Refaça as contas",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
                         score = 0;
@@ -566,7 +563,6 @@ public class GameOperacoes extends AppCompatActivity {
                     gameAnimations();
                 }else{
                     erros++;
-                    Toast.makeText(getApplicationContext(),"Tente outra vez",Toast.LENGTH_SHORT).show();
                     score -= 50;
                     if(score < 0){
                         score = 0;
