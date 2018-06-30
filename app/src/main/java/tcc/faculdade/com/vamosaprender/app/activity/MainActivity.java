@@ -36,7 +36,6 @@ import tcc.faculdade.com.vamosaprender.app.retrofit.RetrofitConfig;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView name;
     public static Boolean bancoSincronizado;
     SQLiteDatabase db;
     RequestBody requestBody = null;
@@ -44,16 +43,20 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences loginArmazenado;
     SharedPreferences.Editor editor;
 
+    private Resources res;
+    private String[] phrases;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        res = getResources();
+        phrases = res.getStringArray(R.array.start_prhases);
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        name = findViewById(R.id.name);
         Button play = findViewById(R.id.replayButton);
         Button profile = findViewById(R.id.endGameButton);
         db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
@@ -64,9 +67,7 @@ public class MainActivity extends AppCompatActivity {
         loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
         editor = loginArmazenado.edit();
 
-
-        name.setText(loginArmazenado.getString("Nome",""));
-        starAnimations();
+        starAnimations(phrases);
         //   sincronizaBanco(bancoSincronizado);
 
         profile.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Função das animações de entrada
-    private void starAnimations() {
+    private void starAnimations(final String phrases[]) {
         final TextView speechPrhases = findViewById(R.id.speechPhrases);
         final ImageView bubble = findViewById(R.id.speechBubble);
         final Animation bubbleAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
@@ -97,9 +98,7 @@ public class MainActivity extends AppCompatActivity {
         bubbleAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                Resources res = getResources();
-                String[] phrases = res.getStringArray(R.array.start_prhases);
-                speechPrhases.setText("Olá " + loginArmazenado.getString("Nome", "Aluno") + ", " + phrases[1]);
+                speechPrhases.setText(String.format(phrases[1], loginArmazenado.getString("Nome", "Aluno")));
                 speechPrhases.setAlpha((float) 1.0);
                 speechPrhases.startAnimation(phraseAnim);
             }
@@ -120,6 +119,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        phrases = res.getStringArray(R.array.main_screen_onRestart);
+        starAnimations(phrases);
         sincronizaBanco(bancoSincronizado);
     }
 
@@ -153,35 +154,41 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             //Faço as preparações e a requisição
-            String json = gson.toJson(scorelist);
-            requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
+            if (!scorelist.isEmpty()) {
+                String json = gson.toJson(scorelist);
+                requestBody = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), json);
 
-            Call<List<Score>> call = new RetrofitConfig()
-                    .setScoreListService()
-                    .setScoreList(requestBody);
-            Log.e("1", " 1");
+                Call<List<Score>> call = new RetrofitConfig()
+                        .setScoreListService()
+                        .setScoreList(requestBody);
+                Log.e("1", " 1");
 
 
-            call.enqueue(new Callback<List<Score>>() {
-                @Override
-                public void onResponse(Call<List<Score>> call, Response<List<Score>> response) {
-                    try {
-                        Log.e("Inserido", "Scores inseridos com sucesso ");
-                        bancoSincronizado = true;
-                        db.execSQL("DROP TABLE score");
-                        Log.e("7", "77");
-                    } catch (Exception e) {
-                        Log.e("3", " 3");
-                        e.printStackTrace();
+                call.enqueue(new Callback<List<Score>>() {
+                    @Override
+                    public void onResponse(Call<List<Score>> call, Response<List<Score>> response) {
+                        try {
+                            if(response.isSuccessful()) {
+                                Log.e("Inserido", "Scores inseridos com sucesso ");
+                                bancoSincronizado = true;
+                                db.execSQL("DROP TABLE score");
+                                Log.e("7", "77");
+                            }else{
+                                Log.e("Resposta: ","Resposta para salvar os score que estavam no banco interno falhou");
+                            }
+                        } catch (Exception e) {
+                            Log.e("3", " 3");
+                            e.printStackTrace();
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<List<Score>> call, Throwable t) {
-                    Log.e("2", " 2");
-                    Log.e("Failure", "Ao sincronizar novo score ");
-                }
-            });
+                    @Override
+                    public void onFailure(Call<List<Score>> call, Throwable t) {
+                        Log.e("2", " 2");
+                        Log.e("Failure", "Ao sincronizar novo score ");
+                    }
+                });
+            }
         }
 
     }

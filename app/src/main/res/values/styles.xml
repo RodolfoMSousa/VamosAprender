@@ -29,4 +29,7 @@
         <item name="android:background">@drawable/operacoes_bordas</item>
     </style>
 
+    <style name="Logo">
+        <item name="android:background">@drawable/logo_style</item>
+    </style>
 </resources>

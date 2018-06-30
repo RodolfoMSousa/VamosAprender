@@ -2,13 +2,13 @@
     <string name="app_name">Vamos Aprender</string>
     <string name="profile_name">Rodolfo Miguel de Sousa</string>
     <string-array name="start_prhases">
-        <item>preparado para aprender?</item>
-        <item>você sabe qual é o segredo dominar alguma habilidade? Prática. Então vamos praticar!!</item>
+        <item>Olá %1$s, preparado para aprender?</item>
+        <item>Olá %1$s, você sabe qual é o segredo para dominar alguma habilidade? Prática. Então vamos praticar!!</item>
     </string-array>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_game_fracionando">GameFracionando</string>
     <string-array name="game_operacoes">
-        <item>Olá, vamos agora ao jogo "OPERAÇÔES", onde você irá praticar e desenvolver suas habilidades matemáticas.</item>
+        <item>%1$s, vamos agora ao jogo "OPERAÇÕES", onde você irá praticar e desenvolver suas habilidades matemáticas.</item>
         <item>Você só precisa realizar as operações e escolher o resultado correto, leve o tempo que precisar.</item>
     </string-array>
     <string-array name="end_game_operacoes">

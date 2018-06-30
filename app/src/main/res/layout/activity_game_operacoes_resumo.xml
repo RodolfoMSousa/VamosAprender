@@ -7,29 +7,16 @@
     android:background="@mipmap/back_main_screen"
     tools:context=".app.activity.GameOperacoesResumoActivity">
 
-    <ImageView
-        android:id="@+id/profilePhoto"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@color/colorAccent" />
-
     <TextView
         android:id="@+id/name"
         style="@style/NameProfileMainScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/profilePhoto"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="96dp" />
 
     <ImageView
         android:id="@+id/myTutor"
@@ -104,49 +91,52 @@
 
     <ImageView
         android:id="@+id/estrela2"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@+id/estrela1"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/estrelaapagada" />
 
     <ImageView
         android:id="@+id/estrela3"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
         android:layout_marginTop="12dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/estrela2"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/estrelaapagada" />
 
     <ImageView
         android:id="@+id/estrela1"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="76dp"
-        android:layout_marginStart="76dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintStart_toEndOf="@+id/profilePhoto"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/estrela2"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/estrelaapagada" />
+
     <ImageView
         android:id="@+id/nextId"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:alpha="1.0"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/setacolorida"
-        android:contentDescription="TODO"
-        android:alpha="1.0"/>
+        app:srcCompat="@drawable/setas_coloridas" />
 </android.support.constraint.ConstraintLayout>

@@ -26,7 +26,7 @@ public class RetrofitConfig {
 
         this.retrofit = new Retrofit.Builder()
                 .client(httpClient.build())
-                .baseUrl("http://192.168.1.2:8080/")
+                .baseUrl("http://api-vamos-aprender.herokuapp.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }

@@ -46,16 +46,13 @@
 
     <ImageView
         android:id="@+id/nextId"
-        android:layout_width="34dp"
-        android:layout_height="34dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:alpha="1.0"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/setacolorida"
-        android:contentDescription="TODO"
-        android:alpha="1.0"/>
+        app:srcCompat="@drawable/setas_coloridas" />
 
     <TextView
         android:id="@+id/tituloGame"

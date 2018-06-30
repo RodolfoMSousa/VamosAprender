@@ -31,7 +31,7 @@ public class GameOperacoes extends AppCompatActivity {
     String[] phrases;
     private int i, ciclo,score,highScore,acertos,erros,jogoId;
     private Button ex,op1,op2,op3,op4;
-    SharedPreferences scoreSalvo;
+    SharedPreferences scoreSalvo,loginArmazenado;
     SharedPreferences usuarioSalvo;
     SharedPreferences.Editor editor;
     public SQLiteDatabase db;
@@ -48,6 +48,7 @@ public class GameOperacoes extends AppCompatActivity {
     private void init(){
         jogoId = 1;
         scoreSalvo = getSharedPreferences("scoreGameOperacoes", MODE_PRIVATE);
+        loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
         editor = scoreSalvo.edit();
         speechPrhases = findViewById(R.id.speechPhrases);
         bubble = findViewById(R.id.speechBubble);
@@ -94,7 +95,7 @@ public class GameOperacoes extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animation animation) {
                 i = 0;
-                speechPrhases.setText(phrases[0]);
+                speechPrhases.setText(String.format(phrases[0],loginArmazenado.getString("Nome", "Aluno")));
                 speechPrhases.setAlpha((float) 1.0);
                 speechPrhases.startAnimation(phraseAnim);
             }

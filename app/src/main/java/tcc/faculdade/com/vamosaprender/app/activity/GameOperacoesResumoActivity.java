@@ -48,8 +48,6 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_operacoes_resumo);
 
-
-
         tutor = findViewById(R.id.myTutor);
         star1 = findViewById(R.id.estrela1);
         star2 = findViewById(R.id.estrela2);
@@ -180,8 +178,8 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
         final Score s = new Score();
         Gson gson = new Gson();
         s.setPontuacao(score);
-        s.setJogoId(1);
-        s.setCategoriaId(1);
+        s.setJogoId(2);
+        s.setCategoriaId(2);
        // s.setAlunoId(2);
         s.setAlunoId(loginArmazenado.getInt("id", 0));
         scoreArrayList.add(s);

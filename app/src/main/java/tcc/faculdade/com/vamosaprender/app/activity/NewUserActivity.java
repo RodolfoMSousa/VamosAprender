@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Typeface;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -35,18 +37,29 @@ public class NewUserActivity extends AppCompatActivity {
     EditText novoUsuId;
     EditText novaSenhaId;
     Button criarNovoUsu;
-
+    TextView nome, email, login, senha;
+    private Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_user);
 
+        font = Typeface.createFromAsset(getAssets(), "fonts/iceland.ttf");
         novoNomeId = findViewById(R.id.novoNomeId);
         novoEmail = findViewById(R.id.novoEmail);
         novoUsuId = findViewById(R.id.novoUusId);
         novaSenhaId = findViewById(R.id.novaSenhaId);
         criarNovoUsu = findViewById(R.id.criarNovoUsu);
+        nome = findViewById(R.id.textNome);
+        email = findViewById(R.id.textEmail);
+        login = findViewById(R.id.textLogin);
+        senha = findViewById(R.id.textSenha);
+
+        nome.setTypeface(font);
+        email.setTypeface(font);
+        login.setTypeface(font);
+        senha.setTypeface(font);
 
         SharedPreferences loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
         final SharedPreferences.Editor editor = loginArmazenado.edit();
@@ -83,10 +96,11 @@ public class NewUserActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 Aluno alunoResposta = response.body();
 
+                                String []nome = alunoResposta.getNome().split(" ");
                                 //Salvando o Login e senha no SharedPreferences
                                 editor.putString("userName", novoUsuId.getText().toString());
                                 editor.putString("senha", novaSenhaId.getText().toString());
-                                editor.putString("Nome", alunoResposta.getNome());
+                                editor.putString("Nome", nome[0]);
                                 editor.putInt("turma", alunoResposta.getTurmaId());
                                 editor.putInt("id", alunoResposta.getAlunoid());
                                 editor.commit();

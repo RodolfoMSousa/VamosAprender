@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -32,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     Button login;
     Button novoUsuario;
+    TextView nomeUsuario,senha;
+    private Typeface font;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,14 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.passwordId);
         login = findViewById(R.id.loginId);
         novoUsuario = findViewById(R.id.BotaoNovoUsuarioId);
+        nomeUsuario = findViewById(R.id.nomeUsuario);
+        senha = findViewById(R.id.senha);
+
+        font = Typeface.createFromAsset(getAssets(), "fonts/iceland.ttf");
+        nomeUsuario.setTypeface(font);
+        nomeUsuario.setTextColor(Color.BLACK);
+        senha.setTypeface(font);
+        senha.setTextColor(Color.BLACK);
 
         final SharedPreferences loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
         final SharedPreferences.Editor editor = loginArmazenado.edit();
@@ -74,11 +87,12 @@ public class LoginActivity extends AppCompatActivity {
                                 if (response.isSuccessful()) {
                                     Aluno l = response.body();
                                     Log.e("Autenticado", "login autenticado");
-                                    Log.e("NOME: ", l.getNome());
+                                    String []nome = l.getNome().split(" ");
+                                    Log.e("NOME: ", nome[0]);
                                     //Salvando o Login e senha no SharedPreferences
                                     editor.putString("userName", userName.getText().toString());
                                     editor.putString("senha", password.getText().toString());
-                                    editor.putString("Nome", l.getNome());
+                                    editor.putString("Nome", nome[0]);
                                     editor.putInt("turma", l.getTurmaId());
                                     //***IF PRA GARANTIR QUE É A PRIMEIRA VEZ
                                     editor.putInt("id", l.getAlunoid());
