@@ -24,14 +24,14 @@ public class GameOperacoes extends AppCompatActivity {
 
     private ImageView tutor;
     private ImageView next;
-    private TextView speechPrhases, titulo, scoreText,contagem;
+    private TextView speechPrhases, titulo, scoreText, contagem;
     private ImageView bubble;
     private Typeface font;
     Resources res;
     String[] phrases;
-    private int i, ciclo,score,highScore,acertos,erros,jogoId;
-    private Button ex,op1,op2,op3,op4;
-    SharedPreferences scoreSalvo,loginArmazenado;
+    private int i, ciclo, score, highScore, acertos, erros, jogoId;
+    private Button ex, op1, op2, op3, op4;
+    SharedPreferences scoreSalvo, loginArmazenado;
     SharedPreferences usuarioSalvo;
     SharedPreferences.Editor editor;
     public SQLiteDatabase db;
@@ -45,7 +45,7 @@ public class GameOperacoes extends AppCompatActivity {
         starAnimations();
     }
 
-    private void init(){
+    private void init() {
         jogoId = 1;
         scoreSalvo = getSharedPreferences("scoreGameOperacoes", MODE_PRIVATE);
         loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
@@ -60,7 +60,7 @@ public class GameOperacoes extends AppCompatActivity {
         titulo.setTextColor(Color.BLACK);
         scoreText = findViewById(R.id.score);
         score = 0;
-        scoreText.setText(""+score);
+        scoreText.setText("" + score);
         contagem = findViewById(R.id.contagem);
         highScore = i = 0;
         acertos = erros = ciclo = 0;
@@ -95,7 +95,7 @@ public class GameOperacoes extends AppCompatActivity {
             @Override
             public void onAnimationStart(Animation animation) {
                 i = 0;
-                speechPrhases.setText(String.format(phrases[0],loginArmazenado.getString("Nome", "Aluno")));
+                speechPrhases.setText(String.format(phrases[0], loginArmazenado.getString("Nome", "Aluno")));
                 speechPrhases.setAlpha((float) 1.0);
                 speechPrhases.startAnimation(phraseAnim);
             }
@@ -110,7 +110,7 @@ public class GameOperacoes extends AppCompatActivity {
                         if (i < phrases.length) {
                             speechPrhases.setText(phrases[i]);
 
-                        }else{
+                        } else {
                             next.setVisibility(View.GONE);
                             next.setEnabled(false);
                             tutor.setVisibility(View.GONE);
@@ -133,7 +133,7 @@ public class GameOperacoes extends AppCompatActivity {
         bubble.startAnimation(bubbleAnim);
     }
 
-    public void gameAnimations(){
+    public void gameAnimations() {
         Animation operacoesAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.operacoes);
         operacoesAnim.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -149,7 +149,7 @@ public class GameOperacoes extends AppCompatActivity {
                 op4.setVisibility(View.VISIBLE);
                 op4.setBackgroundResource(R.drawable.operacoes_bordas);
                 ciclo++;
-                contagem.setText(""+ciclo);
+                contagem.setText("" + ciclo);
                 geraOperacoes();
             }
 
@@ -174,92 +174,92 @@ public class GameOperacoes extends AppCompatActivity {
 
     }
 
-    private void geraOperacoes(){
+    private void geraOperacoes() {
         Random random = new Random();
-        int operacao,operando1,operando2,resultado ,auxResul,operando3;
+        int operacao, operando1, operando2, resultado, auxResul, operando3;
         //caso menos que 6 é o primeiro cilco, entao vem as mais fáceis
-        if(ciclo < 6){
+        if (ciclo < 6) {
             operacao = random.nextInt(2);
             //caso 0 é positivo
-            if(operacao == 0){
+            if (operacao == 0) {
                 operando1 = random.nextInt(10000);
                 operando2 = random.nextInt(1000);
                 resultado = operando1 + operando2;
                 ex.setText(operando1 + " + " + operando2);
-                auxResul = resultado - random.nextInt(20)+1;
-                op1.setText(""+auxResul);
-                auxResul = resultado - random.nextInt(20)+1;
-                op2.setText(""+auxResul);
-                auxResul = resultado - random.nextInt(20)+1;
-                op3.setText(""+auxResul);
-                auxResul = resultado - random.nextInt(20)+1;
-                op4.setText(""+auxResul);
-                switch (random.nextInt(4)+1){
+                auxResul = resultado - random.nextInt(20) + 1;
+                op1.setText("" + auxResul);
+                auxResul = resultado - random.nextInt(20) + 1;
+                op2.setText("" + auxResul);
+                auxResul = resultado - random.nextInt(20) + 1;
+                op3.setText("" + auxResul);
+                auxResul = resultado - random.nextInt(20) + 1;
+                op4.setText("" + auxResul);
+                switch (random.nextInt(4) + 1) {
                     case 1:
-                        op1.setText(""+resultado);
+                        op1.setText("" + resultado);
                         break;
                     case 2:
-                        op2.setText(""+resultado);
+                        op2.setText("" + resultado);
                         break;
                     case 3:
-                        op3.setText(""+resultado);
+                        op3.setText("" + resultado);
                         break;
                     case 4:
-                        op4.setText(""+resultado);
+                        op4.setText("" + resultado);
                         break;
                 }
                 //caso operando se 1 e portanto negativo
-            }else{
+            } else {
                 operando1 = random.nextInt(1000);
                 operando2 = random.nextInt(1000);
-                if(operando1 <= operando2){
+                if (operando1 <= operando2) {
                     resultado = operando2 - operando1;
                     ex.setText(operando2 + " - " + operando1);
-                    auxResul = resultado + random.nextInt(10)+1;
-                    op1.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(20)+1;
-                    op2.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(20)+1;
-                    op3.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(10)+1;
-                    op4.setText(""+auxResul);
-                    switch (random.nextInt(4)+1){
+                    auxResul = resultado + random.nextInt(10) + 1;
+                    op1.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(20) + 1;
+                    op2.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(20) + 1;
+                    op3.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(10) + 1;
+                    op4.setText("" + auxResul);
+                    switch (random.nextInt(4) + 1) {
                         case 1:
-                            op1.setText(""+resultado);
+                            op1.setText("" + resultado);
                             break;
                         case 2:
-                            op2.setText(""+resultado);
+                            op2.setText("" + resultado);
                             break;
                         case 3:
-                            op3.setText(""+resultado);
+                            op3.setText("" + resultado);
                             break;
                         case 4:
-                            op4.setText(""+resultado);
+                            op4.setText("" + resultado);
                             break;
                     }
-                }else{
+                } else {
                     resultado = operando1 - operando2;
                     ex.setText(operando1 + " - " + operando2);
-                    auxResul = resultado + random.nextInt(30)+1;
-                    op1.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(25)+1;
-                    op2.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(45)+1;
-                    op3.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(20)+1;
-                    op4.setText(""+auxResul);
-                    switch (random.nextInt(4)+1){
+                    auxResul = resultado + random.nextInt(30) + 1;
+                    op1.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(25) + 1;
+                    op2.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(45) + 1;
+                    op3.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(20) + 1;
+                    op4.setText("" + auxResul);
+                    switch (random.nextInt(4) + 1) {
                         case 1:
-                            op1.setText(""+resultado);
+                            op1.setText("" + resultado);
                             break;
                         case 2:
-                            op2.setText(""+resultado);
+                            op2.setText("" + resultado);
                             break;
                         case 3:
-                            op3.setText(""+resultado);
+                            op3.setText("" + resultado);
                             break;
                         case 4:
-                            op4.setText(""+resultado);
+                            op4.setText("" + resultado);
                             break;
                     }
                 }
@@ -267,113 +267,110 @@ public class GameOperacoes extends AppCompatActivity {
             setListenners(resultado);
 
 
-        }else if(ciclo > 5 && ciclo <11){
-            
+        } else if (ciclo > 5 && ciclo < 11) {
+
             operacao = random.nextInt(2);
             //caso 0 multiplicação
-            if(operacao == 0){
+            if (operacao == 0) {
                 operando1 = random.nextInt(1000);
-                operando2 = random.nextInt(9)+1;
+                operando2 = random.nextInt(9) + 1;
                 resultado = operando1 * operando2;
                 ex.setText(operando1 + " * " + operando2);
-                auxResul = resultado - random.nextInt(90)+1;
-                op1.setText(""+auxResul);
-                auxResul = resultado - random.nextInt(45)+1;
-                op2.setText(""+auxResul);
-                auxResul = resultado - random.nextInt(20)+1;
-                op3.setText(""+auxResul);
-                auxResul = resultado - random.nextInt(60)+1;
-                op4.setText(""+auxResul);
-                switch (random.nextInt(4)+1){
+                auxResul = resultado - random.nextInt(90) + 1;
+                op1.setText("" + auxResul);
+                auxResul = resultado - random.nextInt(45) + 1;
+                op2.setText("" + auxResul);
+                auxResul = resultado - random.nextInt(20) + 1;
+                op3.setText("" + auxResul);
+                auxResul = resultado - random.nextInt(60) + 1;
+                op4.setText("" + auxResul);
+                switch (random.nextInt(4) + 1) {
                     case 1:
-                        op1.setText(""+resultado);
+                        op1.setText("" + resultado);
                         break;
                     case 2:
-                        op2.setText(""+resultado);
+                        op2.setText("" + resultado);
                         break;
                     case 3:
-                        op3.setText(""+resultado);
+                        op3.setText("" + resultado);
                         break;
                     case 4:
-                        op4.setText(""+resultado);
+                        op4.setText("" + resultado);
                         break;
                 }
                 //caso seja divisão
-            }else{
-                resultado = random.nextInt(500)+10;
-                operando2 = random.nextInt(9)+1;
+            } else {
+                resultado = random.nextInt(500) + 10;
+                operando2 = random.nextInt(9) + 1;
                 operando1 = resultado * operando2;
                 ex.setText(operando1 + " : " + operando2);
-                auxResul = resultado + random.nextInt(43)+1;
-                op1.setText(""+auxResul);
-                auxResul = resultado + random.nextInt(45)+1;
-                op2.setText(""+auxResul);
-                auxResul = resultado + random.nextInt(20)+1;
-                op3.setText(""+auxResul);
-                auxResul = resultado + random.nextInt(60)+1;
-                op4.setText(""+auxResul);
-                switch (random.nextInt(4)+1){
+                auxResul = resultado + random.nextInt(43) + 1;
+                op1.setText("" + auxResul);
+                auxResul = resultado + random.nextInt(45) + 1;
+                op2.setText("" + auxResul);
+                auxResul = resultado + random.nextInt(20) + 1;
+                op3.setText("" + auxResul);
+                auxResul = resultado + random.nextInt(60) + 1;
+                op4.setText("" + auxResul);
+                switch (random.nextInt(4) + 1) {
                     case 1:
-                        op1.setText(""+resultado);
+                        op1.setText("" + resultado);
                         break;
                     case 2:
-                        op2.setText(""+resultado);
+                        op2.setText("" + resultado);
                         break;
                     case 3:
-                        op3.setText(""+resultado);
+                        op3.setText("" + resultado);
                         break;
                     case 4:
-                        op4.setText(""+resultado);
+                        op4.setText("" + resultado);
                         break;
                 }
             }
             setListenners(resultado);
-        }
-
-
-        else if(ciclo > 10 && ciclo < 16){
+        } else if (ciclo > 10 && ciclo < 16) {
             operacao = random.nextInt(2);
             //if 0 multiplicação
-            if(operacao == 0){
+            if (operacao == 0) {
 
                 operacao = random.nextInt(2);
-                if(operacao == 0){
-                    operando1 = random.nextInt(9)+1;
-                    operando2 = random.nextInt(9)+1;
-                    operando3 = random.nextInt(9)+1;
+                if (operacao == 0) {
+                    operando1 = random.nextInt(9) + 1;
+                    operando2 = random.nextInt(9) + 1;
+                    operando3 = random.nextInt(9) + 1;
                     resultado = operando1 * operando2 * operando3;
-                    ex.setText(operando1+" * "+operando2+ " * "+ operando3);
+                    ex.setText(operando1 + " * " + operando2 + " * " + operando3);
 
-                    auxResul = resultado + random.nextInt(8)+1;
-                    op1.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(9)+1;
-                    op2.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(7)+1;
-                    op3.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(6)+1;
-                    op4.setText(""+auxResul);
-                    switch (random.nextInt(4)+1){
+                    auxResul = resultado + random.nextInt(8) + 1;
+                    op1.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(9) + 1;
+                    op2.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(7) + 1;
+                    op3.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(6) + 1;
+                    op4.setText("" + auxResul);
+                    switch (random.nextInt(4) + 1) {
                         case 1:
-                            op1.setText(""+resultado);
+                            op1.setText("" + resultado);
                             break;
                         case 2:
-                            op2.setText(""+resultado);
+                            op2.setText("" + resultado);
                             break;
                         case 3:
-                            op3.setText(""+resultado);
+                            op3.setText("" + resultado);
                             break;
                         case 4:
-                            op4.setText(""+resultado);
+                            op4.setText("" + resultado);
                             break;
                     }
-                }else{
+                } else {
                     int divisore[] = new int[100];
                     int con = 0, a;
-                    resultado = random.nextInt(9)+1;
-                    operando3 = random.nextInt(9)+1;
+                    resultado = random.nextInt(9) + 1;
+                    operando3 = random.nextInt(9) + 1;
                     auxResul = resultado * operando3;
-                    for(int c = 1; c <= auxResul; c++){
-                        if(auxResul % c == 0){
+                    for (int c = 1; c <= auxResul; c++) {
+                        if (auxResul % c == 0) {
                             divisore[con] = c;
                             con++;
                         }
@@ -382,96 +379,96 @@ public class GameOperacoes extends AppCompatActivity {
                     operando2 = divisore[a];
                     operando1 = auxResul / operando2;
 
-                    ex.setText(operando1+" * "+operando2+ " : "+ operando3);
+                    ex.setText(operando1 + " * " + operando2 + " : " + operando3);
 
-                    auxResul = resultado + random.nextInt(8)+1;
-                    op1.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(5)+1;
-                    op2.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(7)+1;
-                    op3.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(6)+1;
-                    op4.setText(""+auxResul);
-                    switch (random.nextInt(4)+1){
+                    auxResul = resultado + random.nextInt(8) + 1;
+                    op1.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(5) + 1;
+                    op2.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(7) + 1;
+                    op3.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(6) + 1;
+                    op4.setText("" + auxResul);
+                    switch (random.nextInt(4) + 1) {
                         case 1:
-                            op1.setText(""+resultado);
+                            op1.setText("" + resultado);
                             break;
                         case 2:
-                            op2.setText(""+resultado);
+                            op2.setText("" + resultado);
                             break;
                         case 3:
-                            op3.setText(""+resultado);
+                            op3.setText("" + resultado);
                             break;
                         case 4:
-                            op4.setText(""+resultado);
+                            op4.setText("" + resultado);
                             break;
                     }
                 }
             }
             //Começou com divisão
-            else{
+            else {
 
                 operacao = random.nextInt(2);
-                if(operacao == 0){
-                    auxResul = random.nextInt(9)+1;
-                    operando2 = random.nextInt(9)+1;
+                if (operacao == 0) {
+                    auxResul = random.nextInt(9) + 1;
+                    operando2 = random.nextInt(9) + 1;
                     operando1 = auxResul * operando2;
 
-                    operando3 = random.nextInt(9)+1;
+                    operando3 = random.nextInt(9) + 1;
                     resultado = auxResul * operando3;
-                    ex.setText(operando1+" : "+operando2+ " * "+ operando3);
+                    ex.setText(operando1 + " : " + operando2 + " * " + operando3);
 
-                    auxResul = resultado + random.nextInt(8)+1;
-                    op1.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(5)+1;
-                    op2.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(7)+1;
-                    op3.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(6)+1;
-                    op4.setText(""+auxResul);
-                    switch (random.nextInt(4)+1){
+                    auxResul = resultado + random.nextInt(8) + 1;
+                    op1.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(5) + 1;
+                    op2.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(7) + 1;
+                    op3.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(6) + 1;
+                    op4.setText("" + auxResul);
+                    switch (random.nextInt(4) + 1) {
                         case 1:
-                            op1.setText(""+resultado);
+                            op1.setText("" + resultado);
                             break;
                         case 2:
-                            op2.setText(""+resultado);
+                            op2.setText("" + resultado);
                             break;
                         case 3:
-                            op3.setText(""+resultado);
+                            op3.setText("" + resultado);
                             break;
                         case 4:
-                            op4.setText(""+resultado);
+                            op4.setText("" + resultado);
                             break;
                     }
-                }else{
-                    resultado = random.nextInt(9)+1;
-                    operando3 = random.nextInt(9)+1;
+                } else {
+                    resultado = random.nextInt(9) + 1;
+                    operando3 = random.nextInt(9) + 1;
                     auxResul = resultado * operando3;
-                    operando2 = random.nextInt(9)+1;
+                    operando2 = random.nextInt(9) + 1;
                     operando1 = auxResul * operando2;
 
-                    ex.setText(operando1+" : "+operando2+ " : "+ operando3);
+                    ex.setText(operando1 + " : " + operando2 + " : " + operando3);
 
-                    auxResul = resultado + random.nextInt(8)+1;
-                    op1.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(5)+1;
-                    op2.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(7)+1;
-                    op3.setText(""+auxResul);
-                    auxResul = resultado + random.nextInt(6)+1;
-                    op4.setText(""+auxResul);
-                    switch (random.nextInt(4)+1){
+                    auxResul = resultado + random.nextInt(8) + 1;
+                    op1.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(5) + 1;
+                    op2.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(7) + 1;
+                    op3.setText("" + auxResul);
+                    auxResul = resultado + random.nextInt(6) + 1;
+                    op4.setText("" + auxResul);
+                    switch (random.nextInt(4) + 1) {
                         case 1:
-                            op1.setText(""+resultado);
+                            op1.setText("" + resultado);
                             break;
                         case 2:
-                            op2.setText(""+resultado);
+                            op2.setText("" + resultado);
                             break;
                         case 3:
-                            op3.setText(""+resultado);
+                            op3.setText("" + resultado);
                             break;
                         case 4:
-                            op4.setText(""+resultado);
+                            op4.setText("" + resultado);
                             break;
                     }
                 }
@@ -481,25 +478,25 @@ public class GameOperacoes extends AppCompatActivity {
     }
 
 
-    public void setListenners(final int resultado){
+    public void setListenners(final int resultado) {
         op1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Integer.parseInt(op1.getText().toString()) == resultado){
+                if (Integer.parseInt(op1.getText().toString()) == resultado) {
                     acertos++;
                     score += 50;
-                    scoreText.setText(""+score);
-                    if(ciclo ==15){
+                    scoreText.setText("" + score);
+                    if (ciclo == 15) {
                         endGame();
                     }
                     gameAnimations();
-                }else{
+                } else {
                     erros++;
                     score -= 50;
-                    if(score < 0){
+                    if (score < 0) {
                         score = 0;
                     }
-                    scoreText.setText(""+score);
+                    scoreText.setText("" + score);
                     op1.setBackgroundResource(R.drawable.operacoes_resposta_errada);
                     op1.setEnabled(false);
                 }
@@ -508,21 +505,21 @@ public class GameOperacoes extends AppCompatActivity {
         op2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Integer.parseInt(op2.getText().toString()) == resultado){
+                if (Integer.parseInt(op2.getText().toString()) == resultado) {
                     acertos++;
                     score += 50;
-                    scoreText.setText(""+score);
-                    if(ciclo ==15){
+                    scoreText.setText("" + score);
+                    if (ciclo == 15) {
                         endGame();
                     }
                     gameAnimations();
-                }else{
+                } else {
                     erros++;
                     score -= 50;
-                    if(score < 0){
+                    if (score < 0) {
                         score = 0;
                     }
-                    scoreText.setText(""+score);
+                    scoreText.setText("" + score);
                     op2.setBackgroundResource(R.drawable.operacoes_resposta_errada);
                     op2.setEnabled(false);
                 }
@@ -531,21 +528,21 @@ public class GameOperacoes extends AppCompatActivity {
         op3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Integer.parseInt(op3.getText().toString()) == resultado){
+                if (Integer.parseInt(op3.getText().toString()) == resultado) {
                     acertos++;
                     score += 50;
-                    scoreText.setText(""+score);
-                    if(ciclo ==15){
+                    scoreText.setText("" + score);
+                    if (ciclo == 15) {
                         endGame();
                     }
                     gameAnimations();
-                }else{
+                } else {
                     erros++;
                     score -= 50;
-                    if(score < 0){
+                    if (score < 0) {
                         score = 0;
                     }
-                    scoreText.setText(""+score);
+                    scoreText.setText("" + score);
                     op3.setBackgroundResource(R.drawable.operacoes_resposta_errada);
                     op3.setEnabled(false);
                 }
@@ -554,21 +551,21 @@ public class GameOperacoes extends AppCompatActivity {
         op4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(Integer.parseInt(op4.getText().toString()) == resultado){
+                if (Integer.parseInt(op4.getText().toString()) == resultado) {
                     acertos++;
                     score += 50;
-                    scoreText.setText(""+score);
-                    if(ciclo ==15){
+                    scoreText.setText("" + score);
+                    if (ciclo == 15) {
                         endGame();
                     }
                     gameAnimations();
-                }else{
+                } else {
                     erros++;
                     score -= 50;
-                    if(score < 0){
+                    if (score < 0) {
                         score = 0;
                     }
-                    scoreText.setText(""+score);
+                    scoreText.setText("" + score);
                     op4.setBackgroundResource(R.drawable.operacoes_resposta_errada);
                     op4.setEnabled(false);
                 }
@@ -576,17 +573,17 @@ public class GameOperacoes extends AppCompatActivity {
         });
     }
 
-    public void endGame(){
-       if(highScore < score) {
-           editor.putInt("HighScore", score);
-           editor.commit();
-           Toast.makeText(getApplicationContext(),"novo record",Toast.LENGTH_SHORT).show();
-           Intent it = new Intent(GameOperacoes.this,GameOperacoesResumoActivity.class);
-           it.putExtra("score",score);
-           //salvaScore();
-           startActivity(it);
-           finish();
-       }
+    public void endGame() {
+        if (scoreSalvo.getInt("scoreGameOperacoes", 0) <= score) {
+            editor.putInt("scoreGameOperacoes", score);
+            editor.commit();
+            Toast.makeText(getApplicationContext(), "Novo Record", Toast.LENGTH_SHORT).show();
+        }
+        Intent it = new Intent(GameOperacoes.this, GameOperacoesResumoActivity.class);
+        it.putExtra("score", score);
+        startActivity(it);
+        finish();
+
     }
 
     /*public void salvaScore(){

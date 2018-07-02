@@ -16,13 +16,14 @@
             android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".app.activity.NewUserActivity"
             android:screenOrientation="landscape"
-            android:theme="@style/NoActionbar"/>
+            android:theme="@style/NoActionbar" />
         <activity
             android:name=".app.activity.ProfileActivity"
             android:label="@string/title_activity_profile"
@@ -39,6 +40,9 @@
             android:theme="@style/NoActionbar" />
         <activity
             android:name=".app.activity.GameOperacoesResumoActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/NoActionbar" />
+        <activity android:name=".app.activity.GameResultadoFinal"
             android:screenOrientation="landscape"
             android:theme="@style/NoActionbar"/>
     </application>

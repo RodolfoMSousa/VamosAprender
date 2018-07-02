@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, GameOperacoes.class));
+                startActivity(new Intent(MainActivity.this, GameResultadoFinal.class));
             }
         });
     }

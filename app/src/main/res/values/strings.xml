@@ -1,25 +1,66 @@
 <resources>
     <string name="app_name">Vamos Aprender</string>
+
     <string name="profile_name">Rodolfo Miguel de Sousa</string>
+
     <string-array name="start_prhases">
         <item>Olá %1$s, preparado para aprender?</item>
         <item>Olá %1$s, você sabe qual é o segredo para dominar alguma habilidade? Prática. Então vamos praticar!!</item>
     </string-array>
+
     <string name="title_activity_profile">ProfileActivity</string>
+
     <string name="title_activity_game_fracionando">GameFracionando</string>
+
     <string-array name="game_operacoes">
         <item>%1$s, vamos agora ao jogo "OPERAÇÕES", onde você irá praticar e desenvolver suas habilidades matemáticas.</item>
         <item>Você só precisa realizar as operações e escolher o resultado correto, leve o tempo que precisar.</item>
     </string-array>
+
     <string-array name="end_game_operacoes">
         <item>Muito bem, lembre-se sempre de praticar para obter melhores resultados.</item>
         <item>Parabéns, você esta quase dominando as operações, com um pouco mais de prática você chega lá.</item>
         <item>Uooou, meus parabéns, você mostrou que domina as operações</item>
     </string-array>
+
     <string name="new_record">Novo Record!!  %1$d</string>
+
     <string name="record">Pontuação: %1$d</string>
+
     <string-array name="main_screen_onRestart">
         <item>%1$s , parabéns pela dedicação. Continue praticando!!!</item>
         <item>Mantenha sempre o foco %1$s ,assim você alcançará seus objetivos!!!</item>
     </string-array>
+
+    <string-array name="game_resultado_final">
+        <item>%1$s, esse é o jogo "RESULTADO FINAL", onde você irá desenvolver habilidades para seguir uma sequência de operações.</item>
+        <item>Você só precisa seguir cada uma das instruções, leve o tempo que precisar e use lápis e papel caso precise!</item>
+        <item>Vamos lá! Encontre o resultado final:</item>
+    </string-array>
+
+    <string-array name="hard_start_instrucoes_game_resultado_final">
+        <item>Comece com o dobro do quociente de\n%1$d : %2$d</item>
+        <item>Comece com o triplo do quociente de\n%1$d : %2$d</item>
+        <item>Comece com o quádruplo do quociente de\n%1$d : %2$d</item>
+    </string-array>
+
+    <string-array name="easy_start_instrucoes_game_resultado_final">
+        <item>Comece com o quociente de %1$d : %2$d</item>
+        <item>Comece com o produto de %1$d X %2$d</item>
+    </string-array>
+
+    <string-array name="easy_instrucoes_game_resultado_final">
+        <item>Adicione: %1$d</item>
+        <item>Subtraia: %1$d</item>
+        <item>Divida por: %1$d</item>
+        <item>Multiplique por: %1$d</item>
+    </string-array>
+
+    <string-array name="hard_instrucoes_game_resultado_final">
+        <item>Subtraia produto de %1$d X %2$d</item>
+        <item>Subtraia quociente de %1$d : %2$d</item>
+        <item>Adcione produto de %1$d X %2$d</item>
+        <item>Adicione quociente de %1$d : %2$d</item>
+    </string-array>
+
 </resources>

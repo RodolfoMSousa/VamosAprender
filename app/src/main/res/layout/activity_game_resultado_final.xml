@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".app.activity.GameResultadoFinal"
+    android:background="@mipmap/back_main_screen">
+
+    <ImageView
+        android:id="@+id/myTutorGame2"
+        android:layout_width="116dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/tutor"
+        android:alpha="1.0"/>
+
+    <ImageView
+        android:id="@+id/speechBubbleGame2"
+        android:layout_width="474dp"
+        android:layout_height="147dp"
+        android:layout_marginBottom="108dp"
+        android:layout_marginLeft="44dp"
+        android:layout_marginStart="44dp"
+        android:alpha="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/balao2" />
+
+    <TextView
+        android:id="@+id/speechPhrasesGame2"
+        android:layout_width="318dp"
+        android:layout_height="53dp"
+        android:layout_marginBottom="70dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:alpha="0.0"
+        android:text=""
+        app:layout_constraintBottom_toBottomOf="@+id/speechBubbleGame2"
+        app:layout_constraintStart_toStartOf="@+id/speechBubbleGame2" />
+
+    <ImageView
+        android:id="@+id/nextIdGame2"
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:contentDescription="TODO"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/setas_coloridas"
+        android:alpha="1.0"/>
+
+    <TextView
+        android:id="@+id/contagemTotalGame2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:text="/10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/scoreGame2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="pontos"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contagemGame2" />
+
+    <TextView
+        android:id="@+id/contagemGame2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toStartOf="@+id/contagemTotalGame2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tituloGame2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="RESULTADO FINAL"
+        android:textSize="30sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/instrucaoGame2"
+        style="@style/BordasOperacoes"
+        android:layout_width="460dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.121"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloGame2" />
+
+    <TextView
+        android:id="@+id/textoInstrucaoGame2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/speechPhrasesGame2"
+        app:layout_constraintStart_toStartOf="@+id/instrucaoGame2"
+        app:layout_constraintTop_toTopOf="@+id/instrucaoGame2" />
+
+    <TextView
+        android:id="@+id/textResultAntGame2"
+        android:layout_width="75dp"
+        android:layout_height="43dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="Resultado Anterior:"
+        android:textSize="15sp"
+        app:layout_constraintStart_toEndOf="@+id/instrucaoGame2"
+        app:layout_constraintTop_toBottomOf="@+id/tituloGame2" />
+
+    <TextView
+        android:id="@+id/resultAntGame2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
+        android:text="5000"
+        android:textSize="25sp"
+        app:layout_constraintStart_toEndOf="@+id/instrucaoGame2"
+        app:layout_constraintTop_toBottomOf="@+id/textResultAntGame2" />
+
+    <Button
+        android:id="@+id/opcao1Game2"
+        style="@style/BordasOperacoes"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/opcao2Game2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instrucaoGame2" />
+
+    <Button
+        android:id="@+id/opcao2Game2"
+        style="@style/BordasOperacoes"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginRight="75dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/instrucaoGame2" />
+
+    <Button
+        android:id="@+id/opcao3Game2"
+        style="@style/BordasOperacoes"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/opcao4Game2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opcao1Game2" />
+
+    <Button
+        android:id="@+id/opcao4Game2"
+        style="@style/BordasOperacoes"
+        android:layout_width="160dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginRight="75dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opcao2Game2" />
+</android.support.constraint.ConstraintLayout>
