@@ -25,11 +25,6 @@
             android:screenOrientation="landscape"
             android:theme="@style/NoActionbar" />
         <activity
-            android:name=".app.activity.ProfileActivity"
-            android:label="@string/title_activity_profile"
-            android:screenOrientation="landscape"
-            android:theme="@style/NoActionbar" />
-        <activity
             android:name=".app.activity.MainActivity"
             android:label="@string/title_activity_game_fracionando"
             android:screenOrientation="landscape"
@@ -42,9 +37,21 @@
             android:name=".app.activity.GameOperacoesResumoActivity"
             android:screenOrientation="landscape"
             android:theme="@style/NoActionbar" />
-        <activity android:name=".app.activity.GameResultadoFinal"
+        <activity
+            android:name=".app.activity.GameResultadoFinal"
             android:screenOrientation="landscape"
-            android:theme="@style/NoActionbar"/>
+            android:theme="@style/NoActionbar" />
+        <activity
+            android:name=".app.activity.GameResultadoResumo"
+            android:screenOrientation="landscape"
+            android:theme="@style/NoActionbar" />
+        <activity
+            android:name=".app.activity.ProfileActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/NoActionbar" />
+        <activity android:name=".app.activity.SelecaoActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/NoActionbar" />
     </application>
 
 </manifest>

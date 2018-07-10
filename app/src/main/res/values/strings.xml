@@ -23,6 +23,12 @@
         <item>Uooou, meus parabéns, você mostrou que domina as operações</item>
     </string-array>
 
+    <string-array name="end_game_resultado_final">
+        <item>Muito bem, lembre-se sempre de praticar para obter melhores resultados.</item>
+        <item>Parabéns, você esta quase dominando as trilhas de operações, com um pouco mais de prática você chega lá.</item>
+        <item>Uooou, meus parabéns, você mostrou que domina as Trilhas</item>
+    </string-array>
+
     <string name="new_record">Novo Record!!  %1$d</string>
 
     <string name="record">Pontuação: %1$d</string>
@@ -33,9 +39,9 @@
     </string-array>
 
     <string-array name="game_resultado_final">
-        <item>%1$s, esse é o jogo "RESULTADO FINAL", onde você irá desenvolver habilidades para seguir uma sequência de operações.</item>
+        <item>%1$s, esse é o jogo "TRILHA", onde você irá desenvolver habilidades para seguir uma sequência de operações.</item>
         <item>Você só precisa seguir cada uma das instruções, leve o tempo que precisar e use lápis e papel caso precise!</item>
-        <item>Vamos lá! Encontre o resultado final:</item>
+        <item>Vamos lá! Siga a Trilha e encontre o resultado final:</item>
     </string-array>
 
     <string-array name="hard_start_instrucoes_game_resultado_final">

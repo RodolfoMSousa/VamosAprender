@@ -5,20 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/back_main_screen"
-    tools:context=".app.activity.GameOperacoesResumoActivity">
-
-    <TextView
-        android:id="@+id/name"
-        style="@style/NameProfileMainScreen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".app.activity.GameResultadoResumo">
 
     <ImageView
         android:id="@+id/myTutorGame2R"
@@ -63,19 +50,19 @@
         app:layout_constraintStart_toEndOf="@+id/replayButtonGame2R" />
 
     <TextView
-        android:id="@+id/speechPhrases"
+        android:id="@+id/speechPhrasesGame2R"
         android:layout_width="318dp"
         android:layout_height="53dp"
         android:layout_marginBottom="70dp"
         android:layout_marginLeft="80dp"
         android:layout_marginStart="80dp"
-        android:text=""
         android:alpha="0.0"
+        android:text=""
         app:layout_constraintBottom_toBottomOf="@+id/speechBubbleGame2R"
         app:layout_constraintStart_toStartOf="@+id/speechBubbleGame2R" />
 
     <TextView
-        android:id="@+id/recordID"
+        android:id="@+id/recordIDGame2R"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -107,7 +94,7 @@
         app:srcCompat="@drawable/estrelaapagada" />
 
     <ImageView
-        android:id="@+id/estrela3"
+        android:id="@+id/estrela3Game2R"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
@@ -120,7 +107,7 @@
         app:srcCompat="@drawable/estrelaapagada" />
 
     <ImageView
-        android:id="@+id/estrela1"
+        android:id="@+id/estrela1Game2R"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
@@ -133,7 +120,7 @@
         app:srcCompat="@drawable/estrelaapagada" />
 
     <ImageView
-        android:id="@+id/nextId"
+        android:id="@+id/nextIdGame2R"
         android:layout_width="125dp"
         android:layout_height="75dp"
         android:alpha="1.0"

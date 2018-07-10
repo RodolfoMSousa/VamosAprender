@@ -30,7 +30,7 @@ import tcc.faculdade.com.vamosaprender.R;
 import tcc.faculdade.com.vamosaprender.app.entidades.Score;
 import tcc.faculdade.com.vamosaprender.app.retrofit.RetrofitConfig;
 
-public class GameOperacoesResumoActivity extends AppCompatActivity {
+public class GameResultadoResumo extends AppCompatActivity {
     private ImageView tutor,star1,star2,star3,speechBubble,next;
     private Button restartBtn, endGameBtn;
     private TextView newRecordTxt, speechText;
@@ -39,7 +39,6 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
     private int score;
     SharedPreferences scoreSalvo;
     SharedPreferences loginArmazenado ;
-    SharedPreferences.Editor editor;
     Typeface font;
     RequestBody requestBody = null;
     SQLiteDatabase db;
@@ -47,25 +46,22 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_operacoes_resumo);
+        setContentView(R.layout.activity_game_resultado_resumo);
 
         tutor = findViewById(R.id.myTutorGame2R);
-        star1 = findViewById(R.id.estrela1);
+        star1 = findViewById(R.id.estrela1Game2R);
         star2 = findViewById(R.id.estrela2Game2R);
-        star3 = findViewById(R.id.estrela3);
+        star3 = findViewById(R.id.estrela3Game2R);
         speechBubble = findViewById(R.id.speechBubbleGame2R);
-        speechText = findViewById(R.id.speechPhrases);
+        speechText = findViewById(R.id.speechPhrasesGame2R);
         restartBtn = findViewById(R.id.replayButtonGame2R);
         endGameBtn = findViewById(R.id.endGameButtonGame2R);
-        newRecordTxt = findViewById(R.id.recordID);
-        next = findViewById(R.id.nextId);
+        newRecordTxt = findViewById(R.id.recordIDGame2R);
+        next = findViewById(R.id.nextIdGame2R);
         res = getResources();
-        phrases = res.getStringArray(R.array.end_game_operacoes);
+        phrases = res.getStringArray(R.array.end_game_resultado_final);
         restartBtn.setEnabled(false);
         endGameBtn.setEnabled(false);
-       // font = Typeface.createFromAsset(getAssets(), "fonts/OpenSansRegular.ttf");
-      //  newRecordTxt.setTypeface(font);
-
         init();
     }
 
@@ -75,15 +71,15 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
 
         Bundle extra = getIntent().getExtras();
         score = extra.getInt("score");
-        scoreSalvo = getSharedPreferences("scoreGameOperacoes", MODE_PRIVATE);
+        scoreSalvo = getSharedPreferences("highScoreResultado", MODE_PRIVATE);
 
         int aux;
-        if(score <= 250 ){
+        if(score <= 150 ){
             star1.setImageDrawable(res.getDrawable(R.drawable.estrelabrilhante));
             star2.setImageDrawable(res.getDrawable(R.drawable.estrelaapagada));
             star3.setImageDrawable(res.getDrawable(R.drawable.estrelaapagada));
             aux = 0;
-        }else if(score > 250 && score <= 500){
+        }else if(score <= 350){
             star1.setImageDrawable(res.getDrawable(R.drawable.estrelabrilhante));
             star2.setImageDrawable(res.getDrawable(R.drawable.estrelabrilhante));
             star3.setImageDrawable(res.getDrawable(R.drawable.estrelaapagada));
@@ -134,7 +130,7 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
                         speechText.setVisibility(View.GONE);
                         speechBubble.setVisibility(View.GONE);
                         next.setVisibility(View.GONE);
-                        if(score <= scoreSalvo.getInt("HighScore",0)) {
+                        if(score <= scoreSalvo.getInt("highScoreResultado",0)) {
                             newRecordTxt.setText(String.format(res.getString(R.string.record),score));
                         }else{
                             newRecordTxt.setText(String.format(res.getString(R.string.new_record),score));
@@ -162,7 +158,7 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
-                startActivity(new Intent(GameOperacoesResumoActivity.this, GameOperacoes.class));
+                startActivity(new Intent(GameResultadoResumo.this, GameResultadoFinal.class));
             }
         });
 
@@ -179,9 +175,9 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
         final Score s = new Score();
         Gson gson = new Gson();
         s.setPontuacao(score);
-        s.setJogoId(2);
-        s.setCategoriaId(2);
-       // s.setAlunoId(2);
+        s.setJogoId(12);
+        s.setCategoriaId(12);
+        // s.setAlunoId(2);
         s.setAlunoId(loginArmazenado.getInt("id", 0));
         scoreArrayList.add(s);
 
@@ -195,7 +191,7 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
         call.enqueue(new Callback<Score>() {
             @Override
             public void onResponse(Call<Score> call, Response<Score> response) {
-               // Log.i("Body da resposta pont: ",""+response.body().getPontuacao());
+                // Log.i("Body da resposta pont: ",""+response.body().getPontuacao());
                 if(response.isSuccessful()){
 
                 }else{
@@ -223,6 +219,4 @@ public class GameOperacoesResumoActivity extends AppCompatActivity {
         });
 
     }
-
-
 }

@@ -107,12 +107,16 @@ public class NewUserActivity extends AppCompatActivity {
 
                                 startActivity(new Intent(NewUserActivity.this,MainActivity.class));
                                 finish();
+                            }else{
+                                Toast.makeText(getApplicationContext(),"Usuario já criado",Toast.LENGTH_SHORT).show();
+                                Log.e("Erro Novo Usuario",response.message());
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Aluno> call, Throwable t) {
-
+                            Log.e("Erro Novo Usuario","falhou");
+                            Toast.makeText(getApplicationContext(),"TENTE NOVAMENTE MAIS TARDE!",Toast.LENGTH_SHORT).show();
                         }
                     });
 

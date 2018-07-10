@@ -3,7 +3,6 @@ package tcc.faculdade.com.vamosaprender.app.activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,7 +29,7 @@ public class GameResultadoFinal extends AppCompatActivity {
     int score, i, a, b, c, d, ant, ciclo, highScore;
     Resources res;
     String[] phrases, easyStart, easyInstrucao, hardStart, hardInstrucao;
-    SharedPreferences scoreSalvo, loginArmazenado;
+    SharedPreferences scoreSalvo, loginArmazenado, ultimoScore;
     SharedPreferences.Editor editor;
     private Button instrucaoButton, op1, op2, op3, op4;
     boolean ePrimeira;
@@ -47,10 +46,11 @@ public class GameResultadoFinal extends AppCompatActivity {
     private void init() {
         scoreSalvo = getSharedPreferences("highScoreResultado", MODE_PRIVATE);
         loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
+        ultimoScore = getSharedPreferences("lastScoreResultado", MODE_PRIVATE);
         speechPrhases = findViewById(R.id.speechPhrasesGame2);
-        bubble = findViewById(R.id.speechBubbleGame2);
+        bubble = findViewById(R.id.speechBubbleGame2R);
         next = findViewById(R.id.nextIdGame2);
-        tutor = findViewById(R.id.myTutorGame2);
+        tutor = findViewById(R.id.myTutorGame2R);
         scoreText = findViewById(R.id.scoreGame2);
         score = 0;
         scoreText.setText(String.format("%1$d", score));
@@ -208,6 +208,7 @@ public class GameResultadoFinal extends AppCompatActivity {
                     instrucaoButton.setText(String.format(easyStart[1], a, b));
                     Log.e("2: ", "2");
                 }
+                Toast.makeText(getApplicationContext(), "" + c, Toast.LENGTH_SHORT).show();
                 geraOpcoes(c);
             }
             //inicio difícil
@@ -332,6 +333,7 @@ public class GameResultadoFinal extends AppCompatActivity {
                     instrucaoButton.setText(String.format(hardInstrucao[ins], a, b));
                 }
             }
+            Toast.makeText(getApplicationContext(), "" + c, Toast.LENGTH_SHORT).show();
             geraOpcoes(c);
         }
     }
@@ -464,9 +466,13 @@ public class GameResultadoFinal extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Novo Record", Toast.LENGTH_SHORT).show();
         }
 
-        /*Intent it = new Intent(GameResultadoFinal.this, GameOperacoesResumoActivity.class);
+        editor = ultimoScore.edit();
+        editor.putInt("lastScoreResultado",score);
+        editor.apply();
+
+        Intent it = new Intent(GameResultadoFinal.this, GameResultadoResumo.class);
         it.putExtra("score", score);
         startActivity(it);
-        finish();*/
+        finish();
     }
 }

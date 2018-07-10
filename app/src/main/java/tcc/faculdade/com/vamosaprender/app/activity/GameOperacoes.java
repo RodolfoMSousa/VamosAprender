@@ -32,7 +32,7 @@ public class GameOperacoes extends AppCompatActivity {
     private int i, ciclo, score, highScore, acertos, erros, jogoId;
     private Button ex, op1, op2, op3, op4;
     SharedPreferences scoreSalvo, loginArmazenado;
-    SharedPreferences usuarioSalvo;
+    SharedPreferences ultimoScore;
     SharedPreferences.Editor editor;
     public SQLiteDatabase db;
 
@@ -49,11 +49,12 @@ public class GameOperacoes extends AppCompatActivity {
         jogoId = 1;
         scoreSalvo = getSharedPreferences("scoreGameOperacoes", MODE_PRIVATE);
         loginArmazenado = getSharedPreferences("loginArmazenado", MODE_PRIVATE);
+        ultimoScore = getSharedPreferences("lastScoreOperacoes", MODE_PRIVATE);
         editor = scoreSalvo.edit();
         speechPrhases = findViewById(R.id.speechPhrases);
-        bubble = findViewById(R.id.speechBubble);
+        bubble = findViewById(R.id.speechBubbleGame2R);
         next = findViewById(R.id.nextId);
-        tutor = findViewById(R.id.myTutor);
+        tutor = findViewById(R.id.myTutorGame2R);
         font = Typeface.createFromAsset(getAssets(), "fonts/iceland.ttf");
         titulo = findViewById(R.id.tituloGame);
         titulo.setTypeface(font);
@@ -576,9 +577,14 @@ public class GameOperacoes extends AppCompatActivity {
     public void endGame() {
         if (scoreSalvo.getInt("scoreGameOperacoes", 0) <= score) {
             editor.putInt("scoreGameOperacoes", score);
-            editor.commit();
+            editor.apply();
             Toast.makeText(getApplicationContext(), "Novo Record", Toast.LENGTH_SHORT).show();
         }
+
+        editor = ultimoScore.edit();
+        editor.putInt("lastScoreOperacoes",score);
+        editor.apply();
+
         Intent it = new Intent(GameOperacoes.this, GameOperacoesResumoActivity.class);
         it.putExtra("score", score);
         startActivity(it);

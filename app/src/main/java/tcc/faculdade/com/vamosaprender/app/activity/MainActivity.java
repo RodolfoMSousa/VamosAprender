@@ -19,8 +19,6 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +29,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import tcc.faculdade.com.vamosaprender.R;
 import tcc.faculdade.com.vamosaprender.app.entidades.Score;
-import tcc.faculdade.com.vamosaprender.app.entidades.Usuario;
 import tcc.faculdade.com.vamosaprender.app.retrofit.RetrofitConfig;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        Button play = findViewById(R.id.replayButton);
-        Button profile = findViewById(R.id.endGameButton);
+        Button play = findViewById(R.id.replayButtonGame2R);
+        Button profile = findViewById(R.id.endGameButtonGame2R);
         db = openOrCreateDatabase("TCC", Context.MODE_PRIVATE, null);
 
 
@@ -73,13 +70,13 @@ public class MainActivity extends AppCompatActivity {
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent());
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
             }
         });
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, GameResultadoFinal.class));
+                startActivity(new Intent(MainActivity.this, SelecaoActivity.class));
             }
         });
     }
@@ -88,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     //Função das animações de entrada
     private void starAnimations(final String phrases[]) {
         final TextView speechPrhases = findViewById(R.id.speechPhrases);
-        final ImageView bubble = findViewById(R.id.speechBubble);
+        final ImageView bubble = findViewById(R.id.speechBubbleGame2R);
         final Animation bubbleAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
         final Animation phraseAnim = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.bubble_main);
 

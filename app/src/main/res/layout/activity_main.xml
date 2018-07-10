@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/logo_2" />
 
     <ImageView
-        android:id="@+id/myTutor"
+        android:id="@+id/myTutorGame2R"
         android:layout_width="116dp"
         android:layout_height="160dp"
         android:layout_marginBottom="8dp"
@@ -34,7 +34,7 @@
         app:srcCompat="@drawable/tutor" />
 
     <ImageView
-        android:id="@+id/speechBubble"
+        android:id="@+id/speechBubbleGame2R"
         android:layout_width="474dp"
         android:layout_height="147dp"
         android:layout_marginBottom="108dp"
@@ -46,20 +46,20 @@
         android:alpha="0.0"/>
 
     <Button
-        android:id="@+id/replayButton"
+        android:id="@+id/replayButtonGame2R"
         style="@style/ButtonMainScreen"
         android:text="QUERO APRENDER"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/endGameButton"
-        app:layout_constraintStart_toEndOf="@+id/myTutor" />
+        app:layout_constraintEnd_toStartOf="@+id/endGameButtonGame2R"
+        app:layout_constraintStart_toEndOf="@+id/myTutorGame2R" />
 
     <Button
-        android:id="@+id/endGameButton"
+        android:id="@+id/endGameButtonGame2R"
         style="@style/ButtonMainScreen"
         android:text="COMO ESTOU INDO?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/replayButton" />
+        app:layout_constraintStart_toEndOf="@+id/replayButtonGame2R" />
 
     <TextView
         android:id="@+id/speechPhrases"
@@ -70,6 +70,6 @@
         android:layout_marginStart="80dp"
         android:text=""
         android:alpha="0.0"
-        app:layout_constraintBottom_toBottomOf="@+id/speechBubble"
-        app:layout_constraintStart_toStartOf="@+id/speechBubble" />
+        app:layout_constraintBottom_toBottomOf="@+id/speechBubbleGame2R"
+        app:layout_constraintStart_toStartOf="@+id/speechBubbleGame2R" />
 </android.support.constraint.ConstraintLayout>

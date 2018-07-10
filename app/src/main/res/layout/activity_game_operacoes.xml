@@ -9,7 +9,7 @@
     tools:context=".app.activity.GameOperacoes">
 
     <ImageView
-        android:id="@+id/myTutor"
+        android:id="@+id/myTutorGame2R"
         android:layout_width="116dp"
         android:layout_height="160dp"
         android:layout_marginBottom="8dp"
@@ -21,7 +21,7 @@
         android:alpha="1.0"/>
 
     <ImageView
-        android:id="@+id/speechBubble"
+        android:id="@+id/speechBubbleGame2R"
         android:layout_width="474dp"
         android:layout_height="147dp"
         android:layout_marginBottom="108dp"
@@ -41,8 +41,8 @@
         android:layout_marginStart="80dp"
         android:text=""
         android:alpha="0.0"
-        app:layout_constraintBottom_toBottomOf="@+id/speechBubble"
-        app:layout_constraintStart_toStartOf="@+id/speechBubble" />
+        app:layout_constraintBottom_toBottomOf="@+id/speechBubbleGame2R"
+        app:layout_constraintStart_toStartOf="@+id/speechBubbleGame2R" />
 
     <ImageView
         android:id="@+id/nextId"
